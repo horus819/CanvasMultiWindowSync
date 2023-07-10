@@ -57,11 +57,8 @@ extension CanvasSyncViewController: PKCanvasViewDelegate {
     }
     
     func canvasViewDrawingDidChange(_ canvasView: PKCanvasView) {
-        DispatchQueue.main.async {
-            let drawing = canvasView.drawing
-            self.canvasView.drawing = drawing
-            DrawingModelController.shared.update(drawing: .init(drawing: drawing.strokes))
-        }
+        let drawing = canvasView.drawing
+        DrawingModelController.shared.update(drawing: .init(drawing: drawing.strokes))
     }
 }
 
