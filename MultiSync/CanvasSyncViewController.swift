@@ -8,8 +8,9 @@
 import UIKit
 import PencilKit
 
-final class CanvasSyncViewController: UIViewController {
+final class CanvasSyncViewController: UIViewController, PKCanvasViewDelegate {
     
+    private let debouncer = Debouncer(timeInterval: 0.05)
     var canvasView: PKCanvasView = {
         let canvasView = PKCanvasView()
         canvasView.translatesAutoresizingMaskIntoConstraints = false
@@ -35,30 +36,29 @@ final class CanvasSyncViewController: UIViewController {
     private func set(toolPicker: PKToolPicker) {
         canvasView.becomeFirstResponder()
         toolPicker.setVisible(true, forFirstResponder: self.canvasView)
-        toolPicker.addObserver(self.canvasView)
+        toolPicker.addObserver(canvasView)
     }
-
-}
-
-// MARK: - PKCanvasViewDelegate
-extension CanvasSyncViewController: PKCanvasViewDelegate {
+    
     @objc func handle(notification: Notification) {
-        guard let event = notification.object as? UpdateEvents else {
-            return
-        }
-        
+        guard let event = notification.object as? UpdateEvents else { return }
+
         switch event {
         case .draw(let drawing):
-            DispatchQueue.main.async {
-                self.canvasView.drawing = PKDrawing(strokes: drawing.drawing)
+            do {
+                self.canvasView.drawing = try PKDrawing(data: drawing.drawing)
+            } catch {
+                
             }
             
         }
     }
     
-    func canvasViewDrawingDidChange(_ canvasView: PKCanvasView) {
-        let drawing = canvasView.drawing
-        DrawingModelController.shared.update(drawing: .init(drawing: drawing.strokes))
+    func canvasViewDidEndUsingTool(_ canvasView: PKCanvasView) {
+        debouncer.renewInterval()
+        debouncer.handler = {
+            let drawing = self.canvasView.drawing
+            DrawingModelController.shared.update(drawing: .init(drawing: drawing.dataRepresentation()))
+        }
     }
 }
 
@@ -72,7 +72,7 @@ final class DrawingModelController {
 }
 
 struct Drawing {
-    let drawing: [PKStroke]
+    let drawing: Data
 }
 
 enum UpdateEvents {

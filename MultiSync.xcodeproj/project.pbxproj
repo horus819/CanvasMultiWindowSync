@@ -7,17 +7,46 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A05FC7BD2A5BD0DF00CEA3B1 /* DBMultiSyncViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A05FC7BC2A5BD0DF00CEA3B1 /* DBMultiSyncViewController.swift */; };
+		A05FC7BF2A5BD0E900CEA3B1 /* DBMultiSyncViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A05FC7BE2A5BD0E900CEA3B1 /* DBMultiSyncViewModel.swift */; };
+		A05FC7C22A5BD38A00CEA3B1 /* DrawingEntity.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A05FC7C02A5BD38A00CEA3B1 /* DrawingEntity.xcdatamodeld */; };
+		A05FC7C42A5BD3D000CEA3B1 /* DBMultiSyncCoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = A05FC7C32A5BD3D000CEA3B1 /* DBMultiSyncCoreData.swift */; };
+		A05FC7C62A5BD50E00CEA3B1 /* DrawingEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = A05FC7C52A5BD50E00CEA3B1 /* DrawingEntity.swift */; };
+		A05FC7C82A5BD55900CEA3B1 /* DrawingStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = A05FC7C72A5BD55900CEA3B1 /* DrawingStorage.swift */; };
+		A05FC7CA2A5BD5BF00CEA3B1 /* DrawingRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = A05FC7C92A5BD5BF00CEA3B1 /* DrawingRepository.swift */; };
+		A05FC7CC2A5BD5F100CEA3B1 /* Drawing.swift in Sources */ = {isa = PBXBuildFile; fileRef = A05FC7CB2A5BD5F100CEA3B1 /* Drawing.swift */; };
+		A05FC7CE2A5BDD0900CEA3B1 /* DBMultiSyncUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A05FC7CD2A5BDD0900CEA3B1 /* DBMultiSyncUseCase.swift */; };
+		A05FC7D12A5BE6C800CEA3B1 /* RuntimeSyncViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A05FC7D02A5BE6C800CEA3B1 /* RuntimeSyncViewController.swift */; };
+		A05FC7D32A5BE6F700CEA3B1 /* RuntimeSyncViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A05FC7D22A5BE6F700CEA3B1 /* RuntimeSyncViewModel.swift */; };
 		A0683F532A57DFF3003884EE /* CanvasSyncViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0683F522A57DFF3003884EE /* CanvasSyncViewController.swift */; };
 		A0714ACF2A56936C0043A4A6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0714ACE2A56936C0043A4A6 /* AppDelegate.swift */; };
 		A0714AD12A56936C0043A4A6 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0714AD02A56936C0043A4A6 /* SceneDelegate.swift */; };
 		A0714AD82A56936D0043A4A6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A0714AD72A56936D0043A4A6 /* Assets.xcassets */; };
 		A0714ADB2A56936D0043A4A6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A0714AD92A56936D0043A4A6 /* LaunchScreen.storyboard */; };
 		A0714AE32A5693ED0043A4A6 /* MultiSyncViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0714AE22A5693ED0043A4A6 /* MultiSyncViewController.swift */; };
+		A0A6E2A22A807712000EA24D /* ButtonSyncViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0A6E2A12A807712000EA24D /* ButtonSyncViewController.swift */; };
+		A0A6E2A52A807BC3000EA24D /* ButtonSyncViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0A6E2A42A807BC3000EA24D /* ButtonSyncViewModel.swift */; };
+		A0A6E2A72A807BD7000EA24D /* Selection.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0A6E2A62A807BD7000EA24D /* Selection.swift */; };
 		A0B462B12A5B7E4800F9910F /* CombineMultiSyncViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0B462B02A5B7E4800F9910F /* CombineMultiSyncViewController.swift */; };
 		A0B462B32A5B7E5000F9910F /* CombineMultiSyncViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0B462B22A5B7E5000F9910F /* CombineMultiSyncViewModel.swift */; };
+		A0BFBDBA2A81C1DA0095F743 /* SelectionButtonsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0BFBDB92A81C1DA0095F743 /* SelectionButtonsViewModel.swift */; };
+		A0BFBDBC2A81C1E60095F743 /* SelectionButtonsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0BFBDBB2A81C1E60095F743 /* SelectionButtonsViewController.swift */; };
+		A0BFBDBF2A8218B40095F743 /* StackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0BFBDBE2A8218B40095F743 /* StackViewController.swift */; };
+		A0DEE9DA2A5D1A5D0087A5B8 /* Debouncer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0DEE9D92A5D1A5D0087A5B8 /* Debouncer.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		A05FC7BC2A5BD0DF00CEA3B1 /* DBMultiSyncViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBMultiSyncViewController.swift; sourceTree = "<group>"; };
+		A05FC7BE2A5BD0E900CEA3B1 /* DBMultiSyncViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBMultiSyncViewModel.swift; sourceTree = "<group>"; };
+		A05FC7C12A5BD38A00CEA3B1 /* Drawing.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Drawing.xcdatamodel; sourceTree = "<group>"; };
+		A05FC7C32A5BD3D000CEA3B1 /* DBMultiSyncCoreData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBMultiSyncCoreData.swift; sourceTree = "<group>"; };
+		A05FC7C52A5BD50E00CEA3B1 /* DrawingEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawingEntity.swift; sourceTree = "<group>"; };
+		A05FC7C72A5BD55900CEA3B1 /* DrawingStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawingStorage.swift; sourceTree = "<group>"; };
+		A05FC7C92A5BD5BF00CEA3B1 /* DrawingRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawingRepository.swift; sourceTree = "<group>"; };
+		A05FC7CB2A5BD5F100CEA3B1 /* Drawing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Drawing.swift; sourceTree = "<group>"; };
+		A05FC7CD2A5BDD0900CEA3B1 /* DBMultiSyncUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBMultiSyncUseCase.swift; sourceTree = "<group>"; };
+		A05FC7D02A5BE6C800CEA3B1 /* RuntimeSyncViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RuntimeSyncViewController.swift; sourceTree = "<group>"; };
+		A05FC7D22A5BE6F700CEA3B1 /* RuntimeSyncViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RuntimeSyncViewModel.swift; sourceTree = "<group>"; };
 		A0683F522A57DFF3003884EE /* CanvasSyncViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CanvasSyncViewController.swift; sourceTree = "<group>"; };
 		A0714ACB2A56936C0043A4A6 /* MultiSync.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MultiSync.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A0714ACE2A56936C0043A4A6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -26,8 +55,15 @@
 		A0714ADA2A56936D0043A4A6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A0714ADC2A56936D0043A4A6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A0714AE22A5693ED0043A4A6 /* MultiSyncViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiSyncViewController.swift; sourceTree = "<group>"; };
+		A0A6E2A12A807712000EA24D /* ButtonSyncViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonSyncViewController.swift; sourceTree = "<group>"; };
+		A0A6E2A42A807BC3000EA24D /* ButtonSyncViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonSyncViewModel.swift; sourceTree = "<group>"; };
+		A0A6E2A62A807BD7000EA24D /* Selection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Selection.swift; sourceTree = "<group>"; };
 		A0B462B02A5B7E4800F9910F /* CombineMultiSyncViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CombineMultiSyncViewController.swift; sourceTree = "<group>"; };
 		A0B462B22A5B7E5000F9910F /* CombineMultiSyncViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CombineMultiSyncViewModel.swift; sourceTree = "<group>"; };
+		A0BFBDB92A81C1DA0095F743 /* SelectionButtonsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectionButtonsViewModel.swift; sourceTree = "<group>"; };
+		A0BFBDBB2A81C1E60095F743 /* SelectionButtonsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectionButtonsViewController.swift; sourceTree = "<group>"; };
+		A0BFBDBE2A8218B40095F743 /* StackViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StackViewController.swift; sourceTree = "<group>"; };
+		A0DEE9D92A5D1A5D0087A5B8 /* Debouncer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Debouncer.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -41,6 +77,30 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A05FC7BB2A5BD0C800CEA3B1 /* DBMultiSyncViewController */ = {
+			isa = PBXGroup;
+			children = (
+				A05FC7BC2A5BD0DF00CEA3B1 /* DBMultiSyncViewController.swift */,
+				A05FC7BE2A5BD0E900CEA3B1 /* DBMultiSyncViewModel.swift */,
+				A05FC7C32A5BD3D000CEA3B1 /* DBMultiSyncCoreData.swift */,
+				A05FC7C52A5BD50E00CEA3B1 /* DrawingEntity.swift */,
+				A05FC7C72A5BD55900CEA3B1 /* DrawingStorage.swift */,
+				A05FC7C92A5BD5BF00CEA3B1 /* DrawingRepository.swift */,
+				A05FC7CB2A5BD5F100CEA3B1 /* Drawing.swift */,
+				A05FC7CD2A5BDD0900CEA3B1 /* DBMultiSyncUseCase.swift */,
+			);
+			path = DBMultiSyncViewController;
+			sourceTree = "<group>";
+		};
+		A05FC7CF2A5BE6AB00CEA3B1 /* RuntimeSyncViewController */ = {
+			isa = PBXGroup;
+			children = (
+				A05FC7D02A5BE6C800CEA3B1 /* RuntimeSyncViewController.swift */,
+				A05FC7D22A5BE6F700CEA3B1 /* RuntimeSyncViewModel.swift */,
+			);
+			path = RuntimeSyncViewController;
+			sourceTree = "<group>";
+		};
 		A0714AC22A56936C0043A4A6 = {
 			isa = PBXGroup;
 			children = (
@@ -60,6 +120,11 @@
 		A0714ACD2A56936C0043A4A6 /* MultiSync */ = {
 			isa = PBXGroup;
 			children = (
+				A0BFBDBD2A8218A40095F743 /* Stack */,
+				A0BFBDB82A81C1C90095F743 /* ButtonsSync */,
+				A0A6E2A32A807BB7000EA24D /* ButtonSync */,
+				A05FC7CF2A5BE6AB00CEA3B1 /* RuntimeSyncViewController */,
+				A05FC7BB2A5BD0C800CEA3B1 /* DBMultiSyncViewController */,
 				A0B462AF2A5B7E3200F9910F /* CombineMultiSyncViewController */,
 				A0714ACE2A56936C0043A4A6 /* AppDelegate.swift */,
 				A0714AD02A56936C0043A4A6 /* SceneDelegate.swift */,
@@ -68,8 +133,20 @@
 				A0714ADC2A56936D0043A4A6 /* Info.plist */,
 				A0714AE22A5693ED0043A4A6 /* MultiSyncViewController.swift */,
 				A0683F522A57DFF3003884EE /* CanvasSyncViewController.swift */,
+				A05FC7C02A5BD38A00CEA3B1 /* DrawingEntity.xcdatamodeld */,
+				A0DEE9D92A5D1A5D0087A5B8 /* Debouncer.swift */,
 			);
 			path = MultiSync;
+			sourceTree = "<group>";
+		};
+		A0A6E2A32A807BB7000EA24D /* ButtonSync */ = {
+			isa = PBXGroup;
+			children = (
+				A0A6E2A12A807712000EA24D /* ButtonSyncViewController.swift */,
+				A0A6E2A42A807BC3000EA24D /* ButtonSyncViewModel.swift */,
+				A0A6E2A62A807BD7000EA24D /* Selection.swift */,
+			);
+			path = ButtonSync;
 			sourceTree = "<group>";
 		};
 		A0B462AF2A5B7E3200F9910F /* CombineMultiSyncViewController */ = {
@@ -79,6 +156,23 @@
 				A0B462B22A5B7E5000F9910F /* CombineMultiSyncViewModel.swift */,
 			);
 			path = CombineMultiSyncViewController;
+			sourceTree = "<group>";
+		};
+		A0BFBDB82A81C1C90095F743 /* ButtonsSync */ = {
+			isa = PBXGroup;
+			children = (
+				A0BFBDB92A81C1DA0095F743 /* SelectionButtonsViewModel.swift */,
+				A0BFBDBB2A81C1E60095F743 /* SelectionButtonsViewController.swift */,
+			);
+			path = ButtonsSync;
+			sourceTree = "<group>";
+		};
+		A0BFBDBD2A8218A40095F743 /* Stack */ = {
+			isa = PBXGroup;
+			children = (
+				A0BFBDBE2A8218B40095F743 /* StackViewController.swift */,
+			);
+			path = Stack;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -151,12 +245,30 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A0BFBDBC2A81C1E60095F743 /* SelectionButtonsViewController.swift in Sources */,
+				A0A6E2A72A807BD7000EA24D /* Selection.swift in Sources */,
+				A05FC7C82A5BD55900CEA3B1 /* DrawingStorage.swift in Sources */,
 				A0714ACF2A56936C0043A4A6 /* AppDelegate.swift in Sources */,
+				A05FC7BD2A5BD0DF00CEA3B1 /* DBMultiSyncViewController.swift in Sources */,
+				A05FC7C22A5BD38A00CEA3B1 /* DrawingEntity.xcdatamodeld in Sources */,
+				A0BFBDBA2A81C1DA0095F743 /* SelectionButtonsViewModel.swift in Sources */,
+				A05FC7D32A5BE6F700CEA3B1 /* RuntimeSyncViewModel.swift in Sources */,
+				A05FC7C42A5BD3D000CEA3B1 /* DBMultiSyncCoreData.swift in Sources */,
+				A0BFBDBF2A8218B40095F743 /* StackViewController.swift in Sources */,
 				A0B462B32A5B7E5000F9910F /* CombineMultiSyncViewModel.swift in Sources */,
 				A0683F532A57DFF3003884EE /* CanvasSyncViewController.swift in Sources */,
+				A05FC7C62A5BD50E00CEA3B1 /* DrawingEntity.swift in Sources */,
+				A0A6E2A52A807BC3000EA24D /* ButtonSyncViewModel.swift in Sources */,
+				A05FC7CC2A5BD5F100CEA3B1 /* Drawing.swift in Sources */,
 				A0714AD12A56936C0043A4A6 /* SceneDelegate.swift in Sources */,
+				A0DEE9DA2A5D1A5D0087A5B8 /* Debouncer.swift in Sources */,
+				A05FC7D12A5BE6C800CEA3B1 /* RuntimeSyncViewController.swift in Sources */,
 				A0714AE32A5693ED0043A4A6 /* MultiSyncViewController.swift in Sources */,
+				A0A6E2A22A807712000EA24D /* ButtonSyncViewController.swift in Sources */,
+				A05FC7CE2A5BDD0900CEA3B1 /* DBMultiSyncUseCase.swift in Sources */,
 				A0B462B12A5B7E4800F9910F /* CombineMultiSyncViewController.swift in Sources */,
+				A05FC7CA2A5BD5BF00CEA3B1 /* DrawingRepository.swift in Sources */,
+				A05FC7BF2A5BD0E900CEA3B1 /* DBMultiSyncViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -372,6 +484,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		A05FC7C02A5BD38A00CEA3B1 /* DrawingEntity.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				A05FC7C12A5BD38A00CEA3B1 /* Drawing.xcdatamodel */,
+			);
+			currentVersion = A05FC7C12A5BD38A00CEA3B1 /* Drawing.xcdatamodel */;
+			path = DrawingEntity.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = A0714AC32A56936C0043A4A6 /* Project object */;
 }

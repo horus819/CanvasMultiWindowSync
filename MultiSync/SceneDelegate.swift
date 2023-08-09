@@ -20,8 +20,14 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         window?.rootViewController = navigationController
         
-        let viewModel = DefaultCombineMultiSyncViewModel()
-        let viewController = CanvasSyncViewController()
+//        let storage = DefaultDrawingStorage()
+//        let repository = DefaultDrawingRepository(drawingStorage: storage)
+//        let useCase = DefaultDBMultiSyncUseCase(repository: repository)
+//        let viewModel = DefaultRuntimeSyncViewModel()
+//        let viewController = MultiSyncViewController()
+        
+        let viewModel = DefaultButtonSyncViewModel(selection: .init(isSelected: false))
+        let viewController = ButtonSyncViewController()
         
         navigationController.pushViewController(viewController, animated: true)
         

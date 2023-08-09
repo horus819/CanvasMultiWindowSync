@@ -40,18 +40,20 @@ final class MultiSyncViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(handle(notification:)), name: UpdateEvent.messageNotificaitonName, object: nil)
     }
     
+    // MARK: - Only view update
     @objc func handle(notification: Notification) {
         guard let event = notification.object as? UpdateEvent else { return }
         switch event {
         case .message(let message):
-            label.text = message.text
+            self.label.text = message.text
 
         }
     }
     
+    // MARK: - Runtime
+    // 모델에 이미 값이 있는 경우 입력해도 양쪽 모두 바뀌지 않고 해당 값으로 고정된다.
     @objc func didEnterMessage(sender: UITextField) {
         let message = sender.text
-        label.text = message
         MessageModelController.shared.add(message: .init(text: message ?? ""))
     }
     
@@ -60,18 +62,18 @@ final class MultiSyncViewController: UIViewController {
 final class MessageModelController {
     static let shared = MessageModelController()
     
-    func add(message: Message) {
+    func add(message: MessageViewModel) {
         let event = UpdateEvent.message(message: message)
         event.post()
     }
 }
 
-struct Message {
+struct MessageViewModel {
     let text: String
 }
 
 enum UpdateEvent {
-    case message(message: Message)
+    case message(message: MessageViewModel)
     
     static let messageNotificaitonName = Notification.Name(rawValue: "Message")
     
