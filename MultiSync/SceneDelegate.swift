@@ -27,7 +27,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 //        let viewController = MultiSyncViewController()
         
         let viewModel = DefaultButtonSyncViewModel(selection: .init(isSelected: false))
-        let viewController = ButtonSyncViewController()
+        let viewController = AsyncAwaitViewController()
         
         navigationController.pushViewController(viewController, animated: true)
         

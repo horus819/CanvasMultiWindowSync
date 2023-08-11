@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A00AF8662A8464DB004B55B1 /* AsyncAwaitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A00AF8652A8464DB004B55B1 /* AsyncAwaitViewController.swift */; };
 		A05FC7BD2A5BD0DF00CEA3B1 /* DBMultiSyncViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A05FC7BC2A5BD0DF00CEA3B1 /* DBMultiSyncViewController.swift */; };
 		A05FC7BF2A5BD0E900CEA3B1 /* DBMultiSyncViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A05FC7BE2A5BD0E900CEA3B1 /* DBMultiSyncViewModel.swift */; };
 		A05FC7C22A5BD38A00CEA3B1 /* DrawingEntity.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A05FC7C02A5BD38A00CEA3B1 /* DrawingEntity.xcdatamodeld */; };
@@ -36,6 +37,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		A00AF8652A8464DB004B55B1 /* AsyncAwaitViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncAwaitViewController.swift; sourceTree = "<group>"; };
 		A05FC7BC2A5BD0DF00CEA3B1 /* DBMultiSyncViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBMultiSyncViewController.swift; sourceTree = "<group>"; };
 		A05FC7BE2A5BD0E900CEA3B1 /* DBMultiSyncViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBMultiSyncViewModel.swift; sourceTree = "<group>"; };
 		A05FC7C12A5BD38A00CEA3B1 /* Drawing.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Drawing.xcdatamodel; sourceTree = "<group>"; };
@@ -77,6 +79,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A00AF8642A8464CB004B55B1 /* AsyncAwaitViewController */ = {
+			isa = PBXGroup;
+			children = (
+				A00AF8652A8464DB004B55B1 /* AsyncAwaitViewController.swift */,
+			);
+			path = AsyncAwaitViewController;
+			sourceTree = "<group>";
+		};
 		A05FC7BB2A5BD0C800CEA3B1 /* DBMultiSyncViewController */ = {
 			isa = PBXGroup;
 			children = (
@@ -120,6 +130,7 @@
 		A0714ACD2A56936C0043A4A6 /* MultiSync */ = {
 			isa = PBXGroup;
 			children = (
+				A00AF8642A8464CB004B55B1 /* AsyncAwaitViewController */,
 				A0BFBDBD2A8218A40095F743 /* Stack */,
 				A0BFBDB82A81C1C90095F743 /* ButtonsSync */,
 				A0A6E2A32A807BB7000EA24D /* ButtonSync */,
@@ -265,6 +276,7 @@
 				A05FC7D12A5BE6C800CEA3B1 /* RuntimeSyncViewController.swift in Sources */,
 				A0714AE32A5693ED0043A4A6 /* MultiSyncViewController.swift in Sources */,
 				A0A6E2A22A807712000EA24D /* ButtonSyncViewController.swift in Sources */,
+				A00AF8662A8464DB004B55B1 /* AsyncAwaitViewController.swift in Sources */,
 				A05FC7CE2A5BDD0900CEA3B1 /* DBMultiSyncUseCase.swift in Sources */,
 				A0B462B12A5B7E4800F9910F /* CombineMultiSyncViewController.swift in Sources */,
 				A05FC7CA2A5BD5BF00CEA3B1 /* DrawingRepository.swift in Sources */,
@@ -427,7 +439,7 @@
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 2;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -458,7 +470,7 @@
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 2;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
