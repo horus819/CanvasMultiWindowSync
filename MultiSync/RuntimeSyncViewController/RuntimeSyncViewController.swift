@@ -34,7 +34,7 @@ final class RuntimeSyncViewController: UIViewController {
         canvasView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
         set(toolPicker: toolPicker)
         canvasView.delegate = self
-        viewModel.didLoadStrokes()
+        extractInformation()
     }
     
     static func create(with viewModel: RuntimeSyncViewModel) -> RuntimeSyncViewController {
@@ -49,20 +49,29 @@ final class RuntimeSyncViewController: UIViewController {
         toolPicker.addObserver(canvasView)
     }
     
+    private func extractInformation() {
+        let currentDevice = UIDevice.current
+        let deviceName = currentDevice.name
+        let deviceModel = currentDevice.model
+        
+        let screenWidth = UIScreen.main.bounds.width
+        print(screenWidth)
+    }
+    
 }
 
 extension RuntimeSyncViewController {
     private func subscribeDrawingData() {
-        viewModel.strokesPublisher
-            .receive(on: DispatchQueue.main)
-            .sink { [weak self] strokes in
-                do {
-                    self?.canvasView.drawing.strokes = strokes
-                } catch {
-                    
-                }
-            }
-            .store(in: &cancellable)
+//        viewModel.strokesPublisher
+//            .receive(on: DispatchQueue.main)
+//            .sink { [weak self] strokes in
+//                do {
+//                    self?.canvasView.drawing.strokes = strokes
+//                } catch {
+//
+//                }
+//            }
+//            .store(in: &cancellable)
     }
 }
 

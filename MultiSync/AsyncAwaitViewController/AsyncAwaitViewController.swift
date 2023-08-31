@@ -33,13 +33,13 @@ struct OMGMemberResponseDTO: Decodable {
 
 extension OMGMemberResponseDTO {
     func toDomain() -> OMGMember {
-        .init(activityName: activityName, name: name, mbti: mbti)
+        return .init(activityName: activityName, name: name, mbti: mbti)
     }
 }
 
 protocol Network {
     func request(with url: URL) async throws -> Data
-    func request(with url: URL, completion: @escaping (Data?, URLResponse?, Error?) -> Void)
+    func request(with url: URL, completion: @escaping (Result<Data, Error>) -> Void)
     func request(with url: URL) -> URLSession.DataTaskPublisher
 }
 
@@ -52,15 +52,64 @@ final class DefaultNetwork: Network {
     func request(with url: URL) async throws -> Data {
         do {
             let requestResult = try await URLSession.shared.data(from: url)
-            return requestResult.0
+            guard let httpURLResponse = requestResult.1 as? HTTPURLResponse else {
+                throw NetworkError.responseError
+            }
+            switch httpURLResponse.statusCode {
+            case 200:
+                return requestResult.0
+                
+            case 300...500:
+                throw NetworkError.statusCode
+                
+            default:
+                throw NetworkError.unknownStatus
+                
+            }
         } catch {
             throw error
         }
     }
     
-    func request(with url: URL, completion: @escaping (Data?, URLResponse?, Error?) -> Void) {
+    func request(with url: URL, completion: @escaping (Result<Data, Error>) -> Void) {
         let urlRequest = URLRequest(url: url)
-        let task = URLSession.shared.dataTask(with: urlRequest, completionHandler: completion)
+        let task = URLSession.shared.dataTask(with: urlRequest, completionHandler: { data, response, error in
+            if let error = error {
+                DispatchQueue.main.async {
+                    completion(.failure(error))
+                }
+            } else {
+                guard let httpURLResponse = response as? HTTPURLResponse else {
+                    DispatchQueue.main.async {
+                        completion(.failure(NetworkError.responseError))
+                    }
+                    return
+                }
+                switch httpURLResponse.statusCode {
+                case 200:
+                    guard let data = data else {
+                        DispatchQueue.main.async {
+                            completion(.failure(NetworkError.data))
+                        }
+                        return
+                    }
+                    DispatchQueue.main.async {
+                        completion(.success(data))
+                    }
+                    
+                case 300...500:
+                    DispatchQueue.main.async {
+                        completion(.failure(NetworkError.statusCode))
+                    }
+                    
+                default:
+                    DispatchQueue.main.async {
+                        completion(.failure(NetworkError.unknownStatus))
+                    }
+                    
+                }
+            }
+        })
         task.resume()
     }
     
@@ -81,7 +130,10 @@ enum NetworkError: Error {
     case data
     case statusCode
     case unknownStatus
-    case decoding
+}
+
+enum DataTransferError: Error {
+    case decodeFailure
 }
 
 final class DefaultDataTransferService: DataTransferService {
@@ -105,49 +157,19 @@ final class DefaultDataTransferService: DataTransferService {
     }
     
     func request(with url: URL, completion: @escaping (Result<OMGResponseDTO, Error>) -> Void) {
-        network.request(with: url) { data, response, error in
-            if let error = error {
-                DispatchQueue.main.async {
+        network.request(with: url) { result in
+            switch result {
+            case .success(let data):
+                do {
+                    let decoded = try self.decoder.decode(OMGResponseDTO.self, from: data)
+                    completion(.success(decoded))
+                } catch let error {
                     completion(.failure(error))
                 }
-            } else {
-                guard let httpURLResponse = response as? HTTPURLResponse else {
-                    DispatchQueue.main.async {
-                        completion(.failure(NetworkError.responseError))
-                    }
-                    return
-                }
-                switch httpURLResponse.statusCode {
-                case 200:
-                    guard let data = data else {
-                        DispatchQueue.main.async {
-                            completion(.failure(NetworkError.data))
-                        }
-                        return
-                    }
-                    do {
-                        let decoded = try self.decoder.decode(OMGResponseDTO.self, from: data)
-                        DispatchQueue.main.async {
-                            completion(.success(decoded))
-                        }
-                    } catch {
-                        DispatchQueue.main.async {
-                            completion(.failure(NetworkError.decoding))
-                        }
-                        
-                    }
-                    
-                case 300...500:
-                    DispatchQueue.main.async {
-                        completion(.failure(NetworkError.statusCode))
-                    }
-                    
-                default:
-                    DispatchQueue.main.async {
-                        completion(.failure(NetworkError.unknownStatus))
-                    }
-                    
-                }
+                
+            case .failure(let error):
+                completion(.failure(error))
+                
             }
         }
     }
@@ -274,7 +296,7 @@ enum AsyncAwaitViewModelError: Error {
 protocol AsyncAwaitViewModel: OMGMemberDataSource {
     var omgPublisher: AnyPublisher<OMG, Never> { get }
     var requestErrorPublisher: AnyPublisher<Error, Never> { get }
-    var omgMemberListViewModel: [OMGMemberListViewModel] { get }
+    var omgMemeberListViewModelPublisher: AnyPublisher<[OMGMemberListViewModel], Never> { get }
     
     func didPressedRequestButton() async
     func didPressedRequestButton()
@@ -287,7 +309,8 @@ final class DefaultAsyncAwaitViewModel: AsyncAwaitViewModel {
     
     private var omg: OMG
     private var omgMember: [OMGMember]
-    private(set) var omgMemberListViewModel: [OMGMemberListViewModel]
+    private var omgMemberListViewModel: [OMGMemberListViewModel]
+    private let omgMemberListViewModelSubject: CurrentValueSubject<[OMGMemberListViewModel], Never>
     private let omgSubject: CurrentValueSubject<OMG, Never>
     private let requestError: PassthroughSubject<Error, Never>
     
@@ -299,11 +322,16 @@ final class DefaultAsyncAwaitViewModel: AsyncAwaitViewModel {
         requestError.eraseToAnyPublisher()
     }
     
+    var omgMemeberListViewModelPublisher: AnyPublisher<[OMGMemberListViewModel], Never> {
+        omgMemberListViewModelSubject.eraseToAnyPublisher()
+    }
+    
     init() {
         self.useCase = DefaultAsyncAwaitUseCase()
         self.omg = .init(member: [])
         self.omgMember = []
         self.omgMemberListViewModel = .init([])
+        self.omgMemberListViewModelSubject = .init([])
         self.omgSubject = .init(.init(member: []))
         self.requestError = .init()
     }
@@ -314,7 +342,8 @@ final class DefaultAsyncAwaitViewModel: AsyncAwaitViewModel {
             self.omg = omg
             self.omgSubject.send(self.omg)
             self.omgMember = omg.member
-            self.omgMemberListViewModel = self.omgMember.map { .init(omgMember: $0)}
+            self.omgMemberListViewModel = self.omgMember.map { .init(omgMember: $0) }
+            self.omgMemberListViewModelSubject.send(omgMemberListViewModel)
         } catch let error {
             requestError.send(error)
         }
@@ -327,7 +356,8 @@ final class DefaultAsyncAwaitViewModel: AsyncAwaitViewModel {
                 self.omg = omg
                 self.omgSubject.send(self.omg)
                 self.omgMember = omg.member
-                self.omgMemberListViewModel = self.omgMember.map { .init(omgMember: $0)}
+                self.omgMemberListViewModel = self.omgMember.map { .init(omgMember: $0) }
+                self.omgMemberListViewModelSubject.send(self.omgMemberListViewModel)
                 
             case .failure(let error):
                 self.requestError.send(error)
@@ -355,7 +385,8 @@ final class DefaultAsyncAwaitViewModel: AsyncAwaitViewModel {
                 self.omg = omg
                 self.omgSubject.send(self.omg)
                 self.omgMember = omg.member
-                self.omgMemberListViewModel = self.omgMember.map { .init(omgMember: $0)}
+                self.omgMemberListViewModel = self.omgMember.map { .init(omgMember: $0) }
+                self.omgMemberListViewModelSubject.send(omgMemberListViewModel)
             }
         return cancellable
     }
@@ -364,11 +395,11 @@ final class DefaultAsyncAwaitViewModel: AsyncAwaitViewModel {
 
 extension DefaultAsyncAwaitViewModel: OMGMemberDataSource {
     func numberOfMember() -> Int {
-        return omgMember.count
+        return omgMemberListViewModel.count
     }
     
-    func loadMember(at index: IndexPath) -> OMGMember {
-        return omgMember[index.row]
+    func loadMember(at index: IndexPath) -> OMGMemberListViewModel {
+        return omgMemberListViewModel[index.row]
     }
 }
 
@@ -408,23 +439,17 @@ final class AsyncAwaitViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .white
         
-        view.addSubview(requestButton)
-        view.addSubview(omgMemberListTableView)
+        addSubViews()
         
-        requestButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 120).isActive = true
-        requestButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        
-        omgMemberListTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
-        omgMemberListTableView.topAnchor.constraint(equalTo: requestButton.bottomAnchor).isActive = true
-        omgMemberListTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
-        omgMemberListTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+        setRequestButtonLayout()
+        setOMGMemberListTableViewLayout()
         
         omgMemberListAdapter = OMGMemberListAdapter(tableView: omgMemberListTableView, dataSource: viewModel, delegate: self)
         
         addActionForRequestButton()
         
-        subscribeOMG(from: viewModel)
-        subscribeRequestError(from: viewModel)
+        subscribeOMG(from: viewModel.omgPublisher)
+        subscribeRequestError(from: viewModel.requestErrorPublisher)
     }
     
     private func addActionForRequestButton() {
@@ -433,11 +458,11 @@ final class AsyncAwaitViewController: UIViewController {
     
     @objc func requestButtonAction(_ sender: UIButton) {
         // MARK: - Async, Await
-//        Task {
-//            await viewModel.didPressedRequestButton()
-//        }
+        Task {
+            await viewModel.didPressedRequestButton()
+        }
         // MARK: - Completion
-        viewModel.didPressedRequestButton()
+//        viewModel.didPressedRequestButton()
         // MARK: - Combine
 //        viewModel.didPressedRequestButtonWithCombine()
 //            .store(in: &cancellables)
@@ -452,8 +477,8 @@ final class AsyncAwaitViewController: UIViewController {
         }
     }
     
-    private func subscribeOMG(from viewModel: AsyncAwaitViewModel) {
-        viewModel.omgPublisher
+    private func subscribeOMG(from omgPublisher: AnyPublisher<OMG, Never>) {
+        omgPublisher
             .receive(on: DispatchQueue.main)
             .sink { [weak self] omg in
                 self?.omgMemberListTableView.reloadData()
@@ -461,14 +486,32 @@ final class AsyncAwaitViewController: UIViewController {
             .store(in: &cancellables)
     }
     
-    private func subscribeRequestError(from viewModel: AsyncAwaitViewModel) {
-        viewModel.requestErrorPublisher
+    private func subscribeRequestError(from requestErrorPublisher: AnyPublisher<Error, Never>) {
+        requestErrorPublisher
             .receive(on: DispatchQueue.main)
             .sink { [weak self] requestError in
                 self?.presentAlert(of: requestError)
             }
             .store(in: &cancellables)
     }
+    
+    private func addSubViews() {
+        view.addSubview(requestButton)
+        view.addSubview(omgMemberListTableView)
+    }
+    
+    private func setOMGMemberListTableViewLayout() {
+        omgMemberListTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+        omgMemberListTableView.topAnchor.constraint(equalTo: requestButton.bottomAnchor).isActive = true
+        omgMemberListTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+        omgMemberListTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+    }
+    
+    private func setRequestButtonLayout() {
+        requestButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 120).isActive = true
+        requestButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+    }
+    
 }
 
 final class OMGListTableViewCell: UITableViewCell {
@@ -491,8 +534,8 @@ final class OMGListTableViewCell: UITableViewCell {
         fatalError()
     }
     
-    func apply(vieWModel: OMGMemberListViewModel) {
-        nameLabel.text = vieWModel.name
+    func apply(viewModel: OMGMemberListViewModel) {
+        nameLabel.text = viewModel.name
     }
     
 }
@@ -505,8 +548,7 @@ extension AsyncAwaitViewController: OMGMemberDelegate {
 
 protocol OMGMemberDataSource: AnyObject {
     func numberOfMember() -> Int
-    func loadMember(at index: IndexPath) -> OMGMember
-    
+    func loadMember(at index: IndexPath) -> OMGMemberListViewModel
 }
 
 protocol OMGMemberDelegate: AnyObject {
@@ -543,7 +585,7 @@ extension OMGMemberListAdapter: UITableViewDataSource {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "OMGListTableViewCell", for: indexPath) as? OMGListTableViewCell else { return .init() }
         guard let dataSource = dataSource else { return .init() }
         let member = dataSource.loadMember(at: indexPath)
-        cell.apply(vieWModel: .init(omgMember: member))
+        cell.apply(viewModel: member)
         return cell
     }
 }
@@ -552,4 +594,70 @@ extension OMGMemberListAdapter: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return delegate?.heightForRow(at: indexPath) ?? 0
     }
+}
+
+final class CustomPalletteView: UIView {
+    
+}
+
+protocol Pallette {
+    
+}
+
+final class CustomPallette: Pallette {
+    
+    enum Mode {
+        case three
+        case four
+        case five
+    }
+    
+    private var drawables: [Drawable]
+    
+    init(drawables: [Drawable]) {
+        self.drawables = drawables
+    }
+    
+    init(mode: Mode) {
+        switch mode {
+        case .three:
+            self.drawables = [Pencil(), LargePencil(), Erasure()]
+            
+        case .four:
+            self.drawables = [Pencil(), LargePencil(), Erasure(), Lasso()]
+            
+        case .five:
+            self.drawables = [Pencil(), LargePencil(), Erasure(), Lasso(), Ruler()]
+            
+        }
+    }
+    
+}
+
+protocol SelectableColor {
+    
+}
+
+protocol Drawable {
+    
+}
+
+final class Pencil: Drawable {
+    
+}
+
+final class LargePencil: Drawable {
+    
+}
+
+final class Erasure: Drawable {
+    
+}
+
+final class Lasso: Drawable {
+    
+}
+
+final class Ruler: Drawable {
+    
 }

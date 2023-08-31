@@ -56,7 +56,7 @@ final class CanvasSyncViewController: UIViewController, PKCanvasViewDelegate {
     func canvasViewDidEndUsingTool(_ canvasView: PKCanvasView) {
         debouncer.renewInterval()
         debouncer.handler = {
-            let drawing = self.canvasView.drawing
+            let drawing = canvasView.drawing
             DrawingModelController.shared.update(drawing: .init(drawing: drawing.dataRepresentation()))
         }
     }

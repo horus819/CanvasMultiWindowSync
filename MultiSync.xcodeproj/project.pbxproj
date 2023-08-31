@@ -19,6 +19,10 @@
 		A05FC7CE2A5BDD0900CEA3B1 /* DBMultiSyncUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A05FC7CD2A5BDD0900CEA3B1 /* DBMultiSyncUseCase.swift */; };
 		A05FC7D12A5BE6C800CEA3B1 /* RuntimeSyncViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A05FC7D02A5BE6C800CEA3B1 /* RuntimeSyncViewController.swift */; };
 		A05FC7D32A5BE6F700CEA3B1 /* RuntimeSyncViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A05FC7D22A5BE6F700CEA3B1 /* RuntimeSyncViewModel.swift */; };
+		A065B7602AA03A6100C72630 /* ToolPickerControlViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A065B75F2AA03A6100C72630 /* ToolPickerControlViewController.swift */; };
+		A065B7632AA06CBB00C72630 /* DrawerButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A065B7622AA06CBB00C72630 /* DrawerButton.swift */; };
+		A065B7652AA06CD500C72630 /* ToolPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A065B7642AA06CD500C72630 /* ToolPickerView.swift */; };
+		A065B7672AA0701200C72630 /* ToolPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A065B7662AA0701200C72630 /* ToolPickerViewController.swift */; };
 		A0683F532A57DFF3003884EE /* CanvasSyncViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0683F522A57DFF3003884EE /* CanvasSyncViewController.swift */; };
 		A0714ACF2A56936C0043A4A6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0714ACE2A56936C0043A4A6 /* AppDelegate.swift */; };
 		A0714AD12A56936C0043A4A6 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0714AD02A56936C0043A4A6 /* SceneDelegate.swift */; };
@@ -49,6 +53,10 @@
 		A05FC7CD2A5BDD0900CEA3B1 /* DBMultiSyncUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBMultiSyncUseCase.swift; sourceTree = "<group>"; };
 		A05FC7D02A5BE6C800CEA3B1 /* RuntimeSyncViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RuntimeSyncViewController.swift; sourceTree = "<group>"; };
 		A05FC7D22A5BE6F700CEA3B1 /* RuntimeSyncViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RuntimeSyncViewModel.swift; sourceTree = "<group>"; };
+		A065B75F2AA03A6100C72630 /* ToolPickerControlViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolPickerControlViewController.swift; sourceTree = "<group>"; };
+		A065B7622AA06CBB00C72630 /* DrawerButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawerButton.swift; sourceTree = "<group>"; };
+		A065B7642AA06CD500C72630 /* ToolPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolPickerView.swift; sourceTree = "<group>"; };
+		A065B7662AA0701200C72630 /* ToolPickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolPickerViewController.swift; sourceTree = "<group>"; };
 		A0683F522A57DFF3003884EE /* CanvasSyncViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CanvasSyncViewController.swift; sourceTree = "<group>"; };
 		A0714ACB2A56936C0043A4A6 /* MultiSync.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MultiSync.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A0714ACE2A56936C0043A4A6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -111,6 +119,25 @@
 			path = RuntimeSyncViewController;
 			sourceTree = "<group>";
 		};
+		A065B75E2AA03A4E00C72630 /* ToolPickerViewController */ = {
+			isa = PBXGroup;
+			children = (
+				A065B7612AA06CB200C72630 /* View */,
+				A065B75F2AA03A6100C72630 /* ToolPickerControlViewController.swift */,
+			);
+			path = ToolPickerViewController;
+			sourceTree = "<group>";
+		};
+		A065B7612AA06CB200C72630 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				A065B7622AA06CBB00C72630 /* DrawerButton.swift */,
+				A065B7642AA06CD500C72630 /* ToolPickerView.swift */,
+				A065B7662AA0701200C72630 /* ToolPickerViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		A0714AC22A56936C0043A4A6 = {
 			isa = PBXGroup;
 			children = (
@@ -130,6 +157,7 @@
 		A0714ACD2A56936C0043A4A6 /* MultiSync */ = {
 			isa = PBXGroup;
 			children = (
+				A065B75E2AA03A4E00C72630 /* ToolPickerViewController */,
 				A00AF8642A8464CB004B55B1 /* AsyncAwaitViewController */,
 				A0BFBDBD2A8218A40095F743 /* Stack */,
 				A0BFBDB82A81C1C90095F743 /* ButtonsSync */,
@@ -263,11 +291,15 @@
 				A05FC7BD2A5BD0DF00CEA3B1 /* DBMultiSyncViewController.swift in Sources */,
 				A05FC7C22A5BD38A00CEA3B1 /* DrawingEntity.xcdatamodeld in Sources */,
 				A0BFBDBA2A81C1DA0095F743 /* SelectionButtonsViewModel.swift in Sources */,
+				A065B7672AA0701200C72630 /* ToolPickerViewController.swift in Sources */,
 				A05FC7D32A5BE6F700CEA3B1 /* RuntimeSyncViewModel.swift in Sources */,
 				A05FC7C42A5BD3D000CEA3B1 /* DBMultiSyncCoreData.swift in Sources */,
+				A065B7632AA06CBB00C72630 /* DrawerButton.swift in Sources */,
 				A0BFBDBF2A8218B40095F743 /* StackViewController.swift in Sources */,
+				A065B7602AA03A6100C72630 /* ToolPickerControlViewController.swift in Sources */,
 				A0B462B32A5B7E5000F9910F /* CombineMultiSyncViewModel.swift in Sources */,
 				A0683F532A57DFF3003884EE /* CanvasSyncViewController.swift in Sources */,
+				A065B7652AA06CD500C72630 /* ToolPickerView.swift in Sources */,
 				A05FC7C62A5BD50E00CEA3B1 /* DrawingEntity.swift in Sources */,
 				A0A6E2A52A807BC3000EA24D /* ButtonSyncViewModel.swift in Sources */,
 				A05FC7CC2A5BD5F100CEA3B1 /* Drawing.swift in Sources */,
