@@ -40,7 +40,7 @@ final class ToolPickerView: UIView {
             drawerButtons.forEach { $0.setSelected(to: false) }
             drawerButtons[index].setSelected(to: true)
         } else {
-            assertionFailure(ToolPickerViewError.countMismatch.rawValue)
+            
         }
     }
     
