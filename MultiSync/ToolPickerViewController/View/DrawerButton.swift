@@ -12,7 +12,7 @@ protocol DrawerButton {
     
     func setSelected(to bool: Bool)
     func set(action: UIAction, for event: UIControl.Event)
-    func set(color: UIColor)
+    func set(backgroundcolor: UIColor)
 }
 
 final class PenButton: UIButton, DrawerButton {
@@ -46,8 +46,8 @@ final class PenButton: UIButton, DrawerButton {
         addAction(action, for: event)
     }
     
-    func set(color: UIColor) {
-        backgroundColor = color
+    func set(backgroundcolor: UIColor) {
+        backgroundColor = backgroundcolor
     }
     
 }
@@ -83,8 +83,8 @@ final class MarkerButton: UIButton, DrawerButton {
         addAction(action, for: event)
     }
     
-    func set(color: UIColor) {
-        backgroundColor = color
+    func set(backgroundcolor: UIColor) {
+        backgroundColor = backgroundcolor
     }
     
 }
