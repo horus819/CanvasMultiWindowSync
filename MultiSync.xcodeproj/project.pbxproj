@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		A00AF8662A8464DB004B55B1 /* AsyncAwaitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A00AF8652A8464DB004B55B1 /* AsyncAwaitViewController.swift */; };
 		A03256482AA15C0300818691 /* ColorPickerButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A03256472AA15C0300818691 /* ColorPickerButton.swift */; };
+		A032564A2AA17A1400818691 /* WidthButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A03256492AA17A1400818691 /* WidthButton.swift */; };
 		A05FC7BD2A5BD0DF00CEA3B1 /* DBMultiSyncViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A05FC7BC2A5BD0DF00CEA3B1 /* DBMultiSyncViewController.swift */; };
 		A05FC7BF2A5BD0E900CEA3B1 /* DBMultiSyncViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A05FC7BE2A5BD0E900CEA3B1 /* DBMultiSyncViewModel.swift */; };
 		A05FC7C22A5BD38A00CEA3B1 /* DrawingEntity.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A05FC7C02A5BD38A00CEA3B1 /* DrawingEntity.xcdatamodeld */; };
@@ -44,6 +45,7 @@
 /* Begin PBXFileReference section */
 		A00AF8652A8464DB004B55B1 /* AsyncAwaitViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncAwaitViewController.swift; sourceTree = "<group>"; };
 		A03256472AA15C0300818691 /* ColorPickerButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPickerButton.swift; sourceTree = "<group>"; };
+		A03256492AA17A1400818691 /* WidthButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidthButton.swift; sourceTree = "<group>"; };
 		A05FC7BC2A5BD0DF00CEA3B1 /* DBMultiSyncViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBMultiSyncViewController.swift; sourceTree = "<group>"; };
 		A05FC7BE2A5BD0E900CEA3B1 /* DBMultiSyncViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBMultiSyncViewModel.swift; sourceTree = "<group>"; };
 		A05FC7C12A5BD38A00CEA3B1 /* Drawing.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Drawing.xcdatamodel; sourceTree = "<group>"; };
@@ -133,6 +135,7 @@
 		A065B7612AA06CB200C72630 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				A03256492AA17A1400818691 /* WidthButton.swift */,
 				A03256472AA15C0300818691 /* ColorPickerButton.swift */,
 				A065B7622AA06CBB00C72630 /* DrawerButton.swift */,
 				A065B7642AA06CD500C72630 /* ToolPickerView.swift */,
@@ -308,6 +311,7 @@
 				A0A6E2A52A807BC3000EA24D /* ButtonSyncViewModel.swift in Sources */,
 				A05FC7CC2A5BD5F100CEA3B1 /* Drawing.swift in Sources */,
 				A0714AD12A56936C0043A4A6 /* SceneDelegate.swift in Sources */,
+				A032564A2AA17A1400818691 /* WidthButton.swift in Sources */,
 				A0DEE9DA2A5D1A5D0087A5B8 /* Debouncer.swift in Sources */,
 				A05FC7D12A5BE6C800CEA3B1 /* RuntimeSyncViewController.swift in Sources */,
 				A0714AE32A5693ED0043A4A6 /* MultiSyncViewController.swift in Sources */,

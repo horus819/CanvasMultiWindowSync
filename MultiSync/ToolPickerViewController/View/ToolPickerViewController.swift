@@ -8,7 +8,8 @@
 import UIKit
 import PencilKit
 
-// MARK: - Pen -> Heavy weight(not save) -> Eraser -> Light weight(cause heavy weight not saved)
+// MARK: - Pen -> Heavy weight(not saved) -> Eraser -> Light weight(cause heavy weight not saved)
+// MARK: - Blue(not saved) -> Pen -> Black(cause blue color not saved)
 
 final class ToolPickerViewController: UIViewController {
     
@@ -57,8 +58,13 @@ final class ToolPickerViewController: UIViewController {
         
         setDrawerActions()
         setWidthActions()
+        setColorActions()
     }
     
+}
+
+// MARK: - Drawer
+extension ToolPickerViewController {
     private func setDrawerActions() {
         let penAction = UIAction { action in
             self.toolPickerView.didSelectDrawerButton(at: 0)
@@ -85,7 +91,10 @@ final class ToolPickerViewController: UIViewController {
         
         toolPickerView.set(penAction: penAction, markerAction: markerAction, eraserAction: eraserAction, lassoAction: lassoAction, for: .touchUpInside)
     }
-    
+}
+
+// MARK: - Width
+extension ToolPickerViewController {
     private func setWidthActions() {
         let lightWidthAction = UIAction { action in
             self.toolPickerView.didSelectWidthButton(at: 0)
@@ -107,5 +116,41 @@ final class ToolPickerViewController: UIViewController {
         
         toolPickerView.set(lightWeightAction: lightWidthAction, mediumWeightAction: mediumWeightAction, heavyWeightAction: heavyWeightAction, for: .touchUpInside)
     }
-    
+}
+
+// MARK: - Color
+extension ToolPickerViewController {
+    private func setColorActions() {
+        let blackColorAction = UIAction { action in
+            self.toolPickerView.didSelectColorButton(at: 0)
+            self.inkingTool?.color = .black
+            self.canvasView.tool = self.inkingTool ?? .init(.pen)
+        }
+        
+        let redColorAction = UIAction { action in
+            self.toolPickerView.didSelectColorButton(at: 1)
+            self.inkingTool?.color = .red
+            self.canvasView.tool = self.inkingTool ?? .init(.pen)
+        }
+        
+        let blueColorAction = UIAction { action in
+            self.toolPickerView.didSelectColorButton(at: 2)
+            self.inkingTool?.color = .blue
+            self.canvasView.tool = self.inkingTool ?? .init(.pen)
+        }
+        
+        let yellowColorAction = UIAction { action in
+            self.toolPickerView.didSelectColorButton(at: 3)
+            self.inkingTool?.color = .yellow
+            self.canvasView.tool = self.inkingTool ?? .init(.pen)
+        }
+        
+        let greenColorAction = UIAction { action in
+            self.toolPickerView.didSelectColorButton(at: 4)
+            self.inkingTool?.color = .green
+            self.canvasView.tool = self.inkingTool ?? .init(.pen)
+        }
+
+        toolPickerView.set(blackColorAction: blackColorAction, redColorAction: redColorAction, blueColorAction: blueColorAction, yellowColorAction: yellowColorAction, greenColorAction: greenColorAction, for: .touchUpInside)
+    }
 }

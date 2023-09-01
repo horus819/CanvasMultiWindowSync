@@ -12,16 +12,16 @@ final class BlackColorPickerButton: UIButton, DrawerButton {
     override var isSelected: Bool {
         didSet {
             if isSelected {
-                
+                self.setTitle("Selected", for: .normal)
             } else {
-                
+                self.setTitle("Black", for: .normal)
             }
         }
     }
     
     override init(frame: CGRect) {
         super.init(frame: .zero)
-        self.setTitle("Pen", for: .normal)
+        self.setTitle("Black", for: .normal)
         self.setTitleColor(.black, for: .normal)
     }
     
@@ -49,16 +49,16 @@ final class RedColorPickerButton: UIButton, DrawerButton {
     override var isSelected: Bool {
         didSet {
             if isSelected {
-                
+                self.setTitle("Selected", for: .normal)
             } else {
-                
+                self.setTitle("Red", for: .normal)
             }
         }
     }
     
     override init(frame: CGRect) {
         super.init(frame: .zero)
-        self.setTitle("Pen", for: .normal)
+        self.setTitle("Red", for: .normal)
         self.setTitleColor(.black, for: .normal)
     }
     
@@ -86,16 +86,16 @@ final class BlueColorPickerButton: UIButton, DrawerButton {
     override var isSelected: Bool {
         didSet {
             if isSelected {
-                
+                self.setTitle("Selected", for: .normal)
             } else {
-                
+                self.setTitle("Blue", for: .normal)
             }
         }
     }
     
     override init(frame: CGRect) {
         super.init(frame: .zero)
-        self.setTitle("Pen", for: .normal)
+        self.setTitle("Blue", for: .normal)
         self.setTitleColor(.black, for: .normal)
     }
     
@@ -123,16 +123,16 @@ final class YellowColorPickerButton: UIButton, DrawerButton {
     override var isSelected: Bool {
         didSet {
             if isSelected {
-                
+                self.setTitle("Selected", for: .normal)
             } else {
-                
+                self.setTitle("Yellow", for: .normal)
             }
         }
     }
     
     override init(frame: CGRect) {
         super.init(frame: .zero)
-        self.setTitle("Pen", for: .normal)
+        self.setTitle("Yellow", for: .normal)
         self.setTitleColor(.black, for: .normal)
     }
     
@@ -160,16 +160,16 @@ final class GreenColorPickerButton: UIButton, DrawerButton {
     override var isSelected: Bool {
         didSet {
             if isSelected {
-                
+                self.setTitle("Selected", for: .normal)
             } else {
-                
+                self.setTitle("Green", for: .normal)
             }
         }
     }
     
     override init(frame: CGRect) {
         super.init(frame: .zero)
-        self.setTitle("Pen", for: .normal)
+        self.setTitle("Green", for: .normal)
         self.setTitleColor(.black, for: .normal)
     }
     

@@ -23,10 +23,12 @@ final class ToolPickerView: UIView {
     }()
     private var drawerButtons: [DrawerButton]
     private var widthButtons: [DrawerButton]
+    private var colorPickerButtons: [DrawerButton]
     
-    init(drawerButtons: [DrawerButton] = [PenButton(), MarkerButton(), EraserButton(), LassoButton()], widthButtons: [DrawerButton] = [LightWidthButton(), MediumWidthButton(), HeavyWidthButton()]) {
+    init(drawerButtons: [DrawerButton] = [PenButton(), MarkerButton(), EraserButton(), LassoButton()], widthButtons: [DrawerButton] = [LightWidthButton(), MediumWidthButton(), HeavyWidthButton()], colorPickerButtons: [DrawerButton] = [BlackColorPickerButton(), RedColorPickerButton(), BlueColorPickerButton(), YellowColorPickerButton(), GreenColorPickerButton()]) {
         self.drawerButtons = drawerButtons
         self.widthButtons = widthButtons
+        self.colorPickerButtons = colorPickerButtons
         super.init(frame: .zero)
         addSubviews()
         setLayout()
@@ -35,9 +37,14 @@ final class ToolPickerView: UIView {
     required init?(coder: NSCoder) {
         self.drawerButtons = [PenButton(), MarkerButton(), EraserButton(), LassoButton()]
         self.widthButtons = [LightWidthButton(), MediumWidthButton(), HeavyWidthButton()]
+        self.colorPickerButtons = [BlackColorPickerButton(), RedColorPickerButton(), BlueColorPickerButton(), YellowColorPickerButton(), GreenColorPickerButton()]
         super.init(coder: coder)
     }
-    
+
+}
+
+// MARK: - Pen
+extension ToolPickerView {
     func didSelectDrawerButton(at index: Int) {
         if drawerButtons.count >= index {
             drawerButtons.forEach { $0.setSelected(to: false) }
@@ -47,21 +54,8 @@ final class ToolPickerView: UIView {
         }
     }
     
-    func didSelectWidthButton(at index: Int) {
-        if widthButtons.count >= index {
-            widthButtons.forEach { $0.setSelected(to: false) }
-            widthButtons[index].setSelected(to: true)
-        } else {
-            
-        }
-    }
-    
     func set(penAction: UIAction, markerAction: UIAction, eraserAction: UIAction, lassoAction: UIAction, for event: UIControl.Event) {
         drawerButtons.forEach { set(drawerButton: $0, penAction: penAction, markerAction: markerAction, eraserAction: eraserAction, lassoAction: lassoAction, event: event) }
-    }
-    
-    func set(lightWeightAction: UIAction, mediumWeightAction: UIAction, heavyWeightAction: UIAction, for event: UIControl.Event) {
-        widthButtons.forEach { set(widthButton: $0, lightWeightAction: lightWeightAction, mediumWeightAction: mediumWeightAction, heavyWeightAction: heavyWeightAction, for: event) }
     }
     
     private func set(drawerButton: DrawerButton, penAction: UIAction, markerAction: UIAction, eraserAction: UIAction, lassoAction: UIAction, event: UIControl.Event) {
@@ -75,6 +69,22 @@ final class ToolPickerView: UIView {
             drawerButton.set(action: lassoAction, for: event)
         }
     }
+}
+
+// MARK: - Width
+extension ToolPickerView {
+    func didSelectWidthButton(at index: Int) {
+        if widthButtons.count >= index {
+            widthButtons.forEach { $0.setSelected(to: false) }
+            widthButtons[index].setSelected(to: true)
+        } else {
+            
+        }
+    }
+    
+    func set(lightWeightAction: UIAction, mediumWeightAction: UIAction, heavyWeightAction: UIAction, for event: UIControl.Event) {
+        widthButtons.forEach { set(widthButton: $0, lightWeightAction: lightWeightAction, mediumWeightAction: mediumWeightAction, heavyWeightAction: heavyWeightAction, for: event) }
+    }
     
     private func set(widthButton: DrawerButton, lightWeightAction: UIAction, mediumWeightAction: UIAction, heavyWeightAction: UIAction, for event: UIControl.Event) {
         if widthButton is LightWidthButton {
@@ -85,11 +95,45 @@ final class ToolPickerView: UIView {
             widthButton.set(action: heavyWeightAction, for: event)
         }
     }
+}
+
+// MARK: - Color
+extension ToolPickerView {
+    func didSelectColorButton(at index: Int) {
+        if colorPickerButtons.count >= index {
+            colorPickerButtons.forEach { $0.setSelected(to: false) }
+            colorPickerButtons[index].setSelected(to: true)
+        } else {
+            
+        }
+    }
     
+    func set(blackColorAction: UIAction, redColorAction: UIAction, blueColorAction: UIAction, yellowColorAction: UIAction, greenColorAction: UIAction, for event: UIControl.Event) {
+        colorPickerButtons.forEach { set(colorButton: $0, blackColorAction: blackColorAction, redColorAction: redColorAction, blueColorAction: blueColorAction, yellowColorAction: yellowColorAction, greenColorAction: greenColorAction, for: event) }
+    }
+    
+    private func set(colorButton: DrawerButton, blackColorAction: UIAction, redColorAction: UIAction, blueColorAction: UIAction, yellowColorAction: UIAction, greenColorAction: UIAction, for event: UIControl.Event) {
+        if colorButton is BlackColorPickerButton {
+            colorButton.set(action: blackColorAction, for: event)
+        } else if colorButton is RedColorPickerButton {
+            colorButton.set(action: redColorAction, for: event)
+        } else if colorButton is BlueColorPickerButton {
+            colorButton.set(action: blueColorAction, for: event)
+        } else if colorButton is YellowColorPickerButton {
+            colorButton.set(action: yellowColorAction, for: event)
+        } else if colorButton is GreenColorPickerButton {
+            colorButton.set(action: greenColorAction, for: event)
+        }
+    }
+}
+
+// MARK: - Subview and layout
+extension ToolPickerView {
     private func addSubviews() {
         addSubview(drawerButtonStackView)
         drawerButtons.forEach { drawerButtonStackView.addArrangedSubview($0 as? UIButton ?? .init()) }
         widthButtons.forEach { drawerButtonStackView.addArrangedSubview($0 as? UIButton ?? .init()) }
+        colorPickerButtons.forEach { drawerButtonStackView.addArrangedSubview($0 as? UIButton ?? .init()) }
     }
     
     private func setLayout() {
@@ -98,5 +142,4 @@ final class ToolPickerView: UIView {
         drawerButtonStackView.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
         drawerButtonStackView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
     }
-    
 }
