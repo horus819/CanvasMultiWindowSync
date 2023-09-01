@@ -59,6 +59,8 @@ final class ToolPickerViewController: UIViewController {
         setDrawerActions()
         setWidthActions()
         setColorActions()
+        setUndoAction()
+        setRedoAction()
     }
     
 }
@@ -152,5 +154,22 @@ extension ToolPickerViewController {
         }
 
         toolPickerView.set(blackColorAction: blackColorAction, redColorAction: redColorAction, blueColorAction: blueColorAction, yellowColorAction: yellowColorAction, greenColorAction: greenColorAction, for: .touchUpInside)
+    }
+}
+
+// MARK: Undo / Redo
+extension ToolPickerViewController {
+    private func setUndoAction() {
+        let undoAction = UIAction { action in
+            self.canvasView.undoManager?.undo()
+        }
+        toolPickerView.setUndo(action: undoAction, for: .touchUpInside)
+    }
+    
+    private func setRedoAction() {
+        let redoAction = UIAction { action in
+            self.canvasView.undoManager?.redo()
+        }
+        toolPickerView.setRedo(action: redoAction, for: .touchUpInside)
     }
 }

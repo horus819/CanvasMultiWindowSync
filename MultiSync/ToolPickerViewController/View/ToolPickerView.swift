@@ -24,6 +24,20 @@ final class ToolPickerView: UIView {
     private var drawerButtons: [DrawerButton]
     private var widthButtons: [DrawerButton]
     private var colorPickerButtons: [DrawerButton]
+    private let undoButton: UIButton = {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setTitle("Undo", for: .normal)
+        button.setTitleColor(.black, for: .normal)
+        return button
+    }()
+    private let redoButton: UIButton = {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setTitle("Redo", for: .normal)
+        button.setTitleColor(.black, for: .normal)
+        return button
+    }()
     
     init(drawerButtons: [DrawerButton] = [PenButton(), MarkerButton(), EraserButton(), LassoButton()], widthButtons: [DrawerButton] = [LightWidthButton(), MediumWidthButton(), HeavyWidthButton()], colorPickerButtons: [DrawerButton] = [BlackColorPickerButton(), RedColorPickerButton(), BlueColorPickerButton(), YellowColorPickerButton(), GreenColorPickerButton()]) {
         self.drawerButtons = drawerButtons
@@ -127,6 +141,17 @@ extension ToolPickerView {
     }
 }
 
+// MARK: - Undo / Redo
+extension ToolPickerView {
+    func setUndo(action: UIAction, for control: UIControl.Event) {
+        undoButton.addAction(action, for: control)
+    }
+    
+    func setRedo(action: UIAction, for control: UIControl.Event) {
+        redoButton.addAction(action, for: control)
+    }
+}
+
 // MARK: - Subview and layout
 extension ToolPickerView {
     private func addSubviews() {
@@ -134,6 +159,8 @@ extension ToolPickerView {
         drawerButtons.forEach { drawerButtonStackView.addArrangedSubview($0 as? UIButton ?? .init()) }
         widthButtons.forEach { drawerButtonStackView.addArrangedSubview($0 as? UIButton ?? .init()) }
         colorPickerButtons.forEach { drawerButtonStackView.addArrangedSubview($0 as? UIButton ?? .init()) }
+        drawerButtonStackView.addArrangedSubview(undoButton)
+        drawerButtonStackView.addArrangedSubview(redoButton)
     }
     
     private func setLayout() {
