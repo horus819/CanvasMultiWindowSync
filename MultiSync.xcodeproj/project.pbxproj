@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		A00AF8662A8464DB004B55B1 /* AsyncAwaitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A00AF8652A8464DB004B55B1 /* AsyncAwaitViewController.swift */; };
+		A03256482AA15C0300818691 /* ColorPickerButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A03256472AA15C0300818691 /* ColorPickerButton.swift */; };
 		A05FC7BD2A5BD0DF00CEA3B1 /* DBMultiSyncViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A05FC7BC2A5BD0DF00CEA3B1 /* DBMultiSyncViewController.swift */; };
 		A05FC7BF2A5BD0E900CEA3B1 /* DBMultiSyncViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A05FC7BE2A5BD0E900CEA3B1 /* DBMultiSyncViewModel.swift */; };
 		A05FC7C22A5BD38A00CEA3B1 /* DrawingEntity.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A05FC7C02A5BD38A00CEA3B1 /* DrawingEntity.xcdatamodeld */; };
@@ -42,6 +43,7 @@
 
 /* Begin PBXFileReference section */
 		A00AF8652A8464DB004B55B1 /* AsyncAwaitViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncAwaitViewController.swift; sourceTree = "<group>"; };
+		A03256472AA15C0300818691 /* ColorPickerButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPickerButton.swift; sourceTree = "<group>"; };
 		A05FC7BC2A5BD0DF00CEA3B1 /* DBMultiSyncViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBMultiSyncViewController.swift; sourceTree = "<group>"; };
 		A05FC7BE2A5BD0E900CEA3B1 /* DBMultiSyncViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBMultiSyncViewModel.swift; sourceTree = "<group>"; };
 		A05FC7C12A5BD38A00CEA3B1 /* Drawing.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Drawing.xcdatamodel; sourceTree = "<group>"; };
@@ -131,6 +133,7 @@
 		A065B7612AA06CB200C72630 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				A03256472AA15C0300818691 /* ColorPickerButton.swift */,
 				A065B7622AA06CBB00C72630 /* DrawerButton.swift */,
 				A065B7642AA06CD500C72630 /* ToolPickerView.swift */,
 				A065B7662AA0701200C72630 /* ToolPickerViewController.swift */,
@@ -293,6 +296,7 @@
 				A0BFBDBA2A81C1DA0095F743 /* SelectionButtonsViewModel.swift in Sources */,
 				A065B7672AA0701200C72630 /* ToolPickerViewController.swift in Sources */,
 				A05FC7D32A5BE6F700CEA3B1 /* RuntimeSyncViewModel.swift in Sources */,
+				A03256482AA15C0300818691 /* ColorPickerButton.swift in Sources */,
 				A05FC7C42A5BD3D000CEA3B1 /* DBMultiSyncCoreData.swift in Sources */,
 				A065B7632AA06CBB00C72630 /* DrawerButton.swift in Sources */,
 				A0BFBDBF2A8218B40095F743 /* StackViewController.swift in Sources */,

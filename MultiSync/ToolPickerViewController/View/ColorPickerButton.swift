@@ -1,30 +1,20 @@
 //
-//  DrawerButton.swift
+//  ColorPickerButton.swift
 //  MultiSync
 //
-//  Created by Jun Ho JANG on 2023/08/31.
+//  Created by Jun Ho JANG on 2023/09/01.
 //
 
 import UIKit
 
-// MARK: - Remove setTitle, image setting needed
-
-protocol DrawerButton {
-    var isSelected: Bool { get set }
-    
-    func setSelected(to bool: Bool)
-    func set(action: UIAction, for event: UIControl.Event)
-    func set(backgroundcolor: UIColor)
-}
-
-final class PenButton: UIButton, DrawerButton {
+final class BlackColorPickerButton: UIButton, DrawerButton {
     
     override var isSelected: Bool {
         didSet {
             if isSelected {
-                self.setTitle("Selected", for: .normal)
+                
             } else {
-                self.setTitle("Pen", for: .normal)
+                
             }
         }
     }
@@ -54,21 +44,21 @@ final class PenButton: UIButton, DrawerButton {
     
 }
 
-final class MarkerButton: UIButton, DrawerButton {
+final class RedColorPickerButton: UIButton, DrawerButton {
     
     override var isSelected: Bool {
         didSet {
             if isSelected {
-                self.setTitle("Selected", for: .normal)
+                
             } else {
-                self.setTitle("Marker", for: .normal)
+                
             }
         }
     }
     
     override init(frame: CGRect) {
         super.init(frame: .zero)
-        self.setTitle("Marker", for: .normal)
+        self.setTitle("Pen", for: .normal)
         self.setTitleColor(.black, for: .normal)
     }
     
@@ -91,21 +81,21 @@ final class MarkerButton: UIButton, DrawerButton {
     
 }
 
-final class EraserButton: UIButton, DrawerButton {
+final class BlueColorPickerButton: UIButton, DrawerButton {
     
     override var isSelected: Bool {
         didSet {
             if isSelected {
-                self.setTitle("Selected", for: .normal)
+                
             } else {
-                self.setTitle("Eraser", for: .normal)
+                
             }
         }
     }
     
     override init(frame: CGRect) {
         super.init(frame: .zero)
-        self.setTitle("Eraser", for: .normal)
+        self.setTitle("Pen", for: .normal)
         self.setTitleColor(.black, for: .normal)
     }
     
@@ -128,21 +118,21 @@ final class EraserButton: UIButton, DrawerButton {
     
 }
 
-final class LassoButton: UIButton, DrawerButton {
+final class YellowColorPickerButton: UIButton, DrawerButton {
     
     override var isSelected: Bool {
         didSet {
             if isSelected {
-                self.setTitle("Selected", for: .normal)
+                
             } else {
-                self.setTitle("Lasso", for: .normal)
+                
             }
         }
     }
     
     override init(frame: CGRect) {
         super.init(frame: .zero)
-        self.setTitle("Lasso", for: .normal)
+        self.setTitle("Pen", for: .normal)
         self.setTitleColor(.black, for: .normal)
     }
     
@@ -165,93 +155,21 @@ final class LassoButton: UIButton, DrawerButton {
     
 }
 
-final class LightWidthButton: UIButton, DrawerButton {
+final class GreenColorPickerButton: UIButton, DrawerButton {
     
     override var isSelected: Bool {
         didSet {
             if isSelected {
-                self.setTitle("Selected", for: .normal)
+                
             } else {
-                self.setTitle("LightWeight", for: .normal)
+                
             }
         }
     }
     
     override init(frame: CGRect) {
         super.init(frame: .zero)
-        self.setTitle("LightWeight", for: .normal)
-        self.setTitleColor(.black, for: .normal)
-    }
-    
-    required init?(coder: NSCoder) {
-        super.init(coder: coder)
-        self.isSelected = false
-    }
-    
-    func setSelected(to bool: Bool) {
-        isSelected = bool
-    }
-    
-    func set(action: UIAction, for event: UIControl.Event) {
-        addAction(action, for: event)
-    }
-    
-    func set(backgroundcolor: UIColor) {
-        backgroundColor = backgroundcolor
-    }
-    
-}
-final class MediumWidthButton: UIButton, DrawerButton {
-    
-    override var isSelected: Bool {
-        didSet {
-            if isSelected {
-                self.setTitle("Selected", for: .normal)
-            } else {
-                self.setTitle("MediumWeight", for: .normal)
-            }
-        }
-    }
-    
-    override init(frame: CGRect) {
-        super.init(frame: .zero)
-        self.setTitle("MediumWeight", for: .normal)
-        self.setTitleColor(.black, for: .normal)
-    }
-    
-    required init?(coder: NSCoder) {
-        super.init(coder: coder)
-        self.isSelected = false
-    }
-    
-    func setSelected(to bool: Bool) {
-        isSelected = bool
-    }
-    
-    func set(action: UIAction, for event: UIControl.Event) {
-        addAction(action, for: event)
-    }
-    
-    func set(backgroundcolor: UIColor) {
-        backgroundColor = backgroundcolor
-    }
-    
-}
-final class HeavyWidthButton: UIButton, DrawerButton {
-    
-    override var isSelected: Bool {
-        didSet {
-            if isSelected {
-                self.setTitle("Selected", for: .normal)
-            } else {
-                self.setTitle("HeavyWidth", for: .normal)
-            }
-        }
-    }
-    
-    override init(frame: CGRect) {
-        super.init(frame: .zero)
-        self.setTitle("HeavyWidth", for: .normal)
+        self.setTitle("Pen", for: .normal)
         self.setTitleColor(.black, for: .normal)
     }
     
