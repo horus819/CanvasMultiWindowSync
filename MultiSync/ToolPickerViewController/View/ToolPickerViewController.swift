@@ -38,9 +38,6 @@ final class ToolPickerViewController: UIViewController {
         let lassoTool = PKLassoTool()
         return lassoTool
     }()
-    private var inkType: PKInkingTool.InkType = .pencil
-    private var inkColor: UIColor = .black
-    private var pencilWidth: CGFloat = 12
     
     override func viewDidLoad() {
         super.viewDidLoad()
