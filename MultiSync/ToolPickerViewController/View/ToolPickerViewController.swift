@@ -8,9 +8,6 @@
 import UIKit
 import PencilKit
 
-// MARK: - Pen -> Heavy weight(not saved) -> Eraser -> Light weight(cause heavy weight not saved)
-// MARK: - Blue(not saved) -> Pen -> Black(cause blue color not saved)
-
 final class ToolPickerViewController: UIViewController {
     
     private let toolPickerView: ToolPickerView = {
