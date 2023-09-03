@@ -38,6 +38,9 @@ final class ToolPickerViewController: UIViewController {
         let lassoTool = PKLassoTool()
         return lassoTool
     }()
+    private var inkType: PKInkingTool.InkType = .pencil
+    private var inkColor: UIColor = .black
+    private var pencilWidth: CGFloat = 12
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -70,13 +73,15 @@ extension ToolPickerViewController {
     private func setDrawerActions() {
         let penAction = UIAction { action in
             self.toolPickerView.didSelectDrawerButton(at: 0)
-            self.inkingTool = PKInkingTool(.pen)
+            self.inkType = .pen
+            self.inkingTool = PKInkingTool(self.inkType, color: self.inkColor, width: self.pencilWidth)
             self.canvasView.tool = self.inkingTool ?? .init(.pen)
         }
         
         let markerAction = UIAction { action in
             self.toolPickerView.didSelectDrawerButton(at: 1)
-            self.inkingTool = PKInkingTool(.marker)
+            self.inkType = .marker
+            self.inkingTool = PKInkingTool(self.inkType, color: self.inkColor, width: self.pencilWidth)
             self.canvasView.tool = self.inkingTool ?? .init(.marker)
         }
         
@@ -100,19 +105,22 @@ extension ToolPickerViewController {
     private func setWidthActions() {
         let lightWidthAction = UIAction { action in
             self.toolPickerView.didSelectWidthButton(at: 0)
-            self.inkingTool?.width = 4
+            self.pencilWidth = 4
+            self.inkingTool = PKInkingTool(self.inkType, color: self.inkColor, width: self.pencilWidth)
             self.canvasView.tool = self.inkingTool ?? .init(.pen)
         }
         
         let mediumWeightAction = UIAction { action in
             self.toolPickerView.didSelectWidthButton(at: 1)
-            self.inkingTool?.width = 12
+            self.pencilWidth = 12
+            self.inkingTool = PKInkingTool(self.inkType, color: self.inkColor, width: self.pencilWidth)
             self.canvasView.tool = self.inkingTool ?? .init(.pen)
         }
         
         let heavyWeightAction = UIAction { action in
             self.toolPickerView.didSelectWidthButton(at: 2)
-            self.inkingTool?.width = 20
+            self.pencilWidth = 20
+            self.inkingTool = PKInkingTool(self.inkType, color: self.inkColor, width: self.pencilWidth)
             self.canvasView.tool = self.inkingTool ?? .init(.pen)
         }
         
@@ -125,31 +133,36 @@ extension ToolPickerViewController {
     private func setColorActions() {
         let blackColorAction = UIAction { action in
             self.toolPickerView.didSelectColorButton(at: 0)
-            self.inkingTool?.color = .black
+            self.inkColor = .black
+            self.inkingTool = PKInkingTool(self.inkType, color: self.inkColor, width: self.pencilWidth)
             self.canvasView.tool = self.inkingTool ?? .init(.pen)
         }
         
         let redColorAction = UIAction { action in
             self.toolPickerView.didSelectColorButton(at: 1)
-            self.inkingTool?.color = .red
+            self.inkColor = .red
+            self.inkingTool = PKInkingTool(self.inkType, color: self.inkColor, width: self.pencilWidth)
             self.canvasView.tool = self.inkingTool ?? .init(.pen)
         }
         
         let blueColorAction = UIAction { action in
             self.toolPickerView.didSelectColorButton(at: 2)
-            self.inkingTool?.color = .blue
+            self.inkColor = .blue
+            self.inkingTool = PKInkingTool(self.inkType, color: self.inkColor, width: self.pencilWidth)
             self.canvasView.tool = self.inkingTool ?? .init(.pen)
         }
         
         let yellowColorAction = UIAction { action in
             self.toolPickerView.didSelectColorButton(at: 3)
-            self.inkingTool?.color = .yellow
+            self.inkColor = .yellow
+            self.inkingTool = PKInkingTool(self.inkType, color: self.inkColor, width: self.pencilWidth)
             self.canvasView.tool = self.inkingTool ?? .init(.pen)
         }
         
         let greenColorAction = UIAction { action in
             self.toolPickerView.didSelectColorButton(at: 4)
-            self.inkingTool?.color = .green
+            self.inkColor = .green
+            self.inkingTool = PKInkingTool(self.inkType, color: self.inkColor, width: self.pencilWidth)
             self.canvasView.tool = self.inkingTool ?? .init(.pen)
         }
 
