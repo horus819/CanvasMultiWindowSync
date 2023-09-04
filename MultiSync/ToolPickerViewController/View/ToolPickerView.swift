@@ -39,7 +39,7 @@ final class ToolPickerView: UIView {
         return button
     }()
     
-    init(drawerButtons: [DrawerButton] = [PenButton(), MarkerButton(), EraserButton(), LassoButton()], widthButtons: [DrawerButton] = [LightWidthButton(), MediumWidthButton(), HeavyWidthButton()], colorPickerButtons: [DrawerButton] = [BlackColorPickerButton(), RedColorPickerButton(), BlueColorPickerButton(), YellowColorPickerButton(), GreenColorPickerButton()]) {
+    init(drawerButtons: [DrawerButton] = [PenButton(), MarkerButton(), EraserButton(), LassoButton()], widthButtons: [DrawerButton] = [LightWidthButton(), MediumWidthButton(), HeavyWidthButton()], colorPickerButtons: [DrawerButton] = [BlackColorPickerButton(), RedColorPickerButton(), BlueColorPickerButton(), YellowColorPickerButton(), GreenColorPickerButton(), ColorPickerButton()]) {
         self.drawerButtons = drawerButtons
         self.widthButtons = widthButtons
         self.colorPickerButtons = colorPickerButtons
@@ -51,7 +51,7 @@ final class ToolPickerView: UIView {
     required init?(coder: NSCoder) {
         self.drawerButtons = [PenButton(), MarkerButton(), EraserButton(), LassoButton()]
         self.widthButtons = [LightWidthButton(), MediumWidthButton(), HeavyWidthButton()]
-        self.colorPickerButtons = [BlackColorPickerButton(), RedColorPickerButton(), BlueColorPickerButton(), YellowColorPickerButton(), GreenColorPickerButton()]
+        self.colorPickerButtons = [BlackColorPickerButton(), RedColorPickerButton(), BlueColorPickerButton(), YellowColorPickerButton(), GreenColorPickerButton(), ColorPickerButton()]
         super.init(coder: coder)
     }
 
@@ -122,11 +122,18 @@ extension ToolPickerView {
         }
     }
     
-    func set(blackColorAction: UIAction, redColorAction: UIAction, blueColorAction: UIAction, yellowColorAction: UIAction, greenColorAction: UIAction, for event: UIControl.Event) {
-        colorPickerButtons.forEach { set(colorButton: $0, blackColorAction: blackColorAction, redColorAction: redColorAction, blueColorAction: blueColorAction, yellowColorAction: yellowColorAction, greenColorAction: greenColorAction, for: event) }
+    func didSet(to controller: UIPopoverPresentationController?) {
+        guard let colorPickerButton = colorPickerButtons.last as? UIButton else { return }
+        if colorPickerButton is ColorPickerButton {
+            controller?.sourceView = colorPickerButton
+        }
     }
     
-    private func set(colorButton: DrawerButton, blackColorAction: UIAction, redColorAction: UIAction, blueColorAction: UIAction, yellowColorAction: UIAction, greenColorAction: UIAction, for event: UIControl.Event) {
+    func set(blackColorAction: UIAction, redColorAction: UIAction, blueColorAction: UIAction, yellowColorAction: UIAction, greenColorAction: UIAction, colorPickerAction: UIAction, for event: UIControl.Event) {
+        colorPickerButtons.forEach { set(colorButton: $0, blackColorAction: blackColorAction, redColorAction: redColorAction, blueColorAction: blueColorAction, yellowColorAction: yellowColorAction, greenColorAction: greenColorAction, colorPickerAction: colorPickerAction, for: event) }
+    }
+    
+    private func set(colorButton: DrawerButton, blackColorAction: UIAction, redColorAction: UIAction, blueColorAction: UIAction, yellowColorAction: UIAction, greenColorAction: UIAction, colorPickerAction: UIAction, for event: UIControl.Event) {
         if colorButton is BlackColorPickerButton {
             colorButton.set(action: blackColorAction, for: event)
         } else if colorButton is RedColorPickerButton {
@@ -137,6 +144,8 @@ extension ToolPickerView {
             colorButton.set(action: yellowColorAction, for: event)
         } else if colorButton is GreenColorPickerButton {
             colorButton.set(action: greenColorAction, for: event)
+        } else if colorButton is ColorPickerButton {
+            colorButton.set(action: colorPickerAction, for: event)
         }
     }
 }

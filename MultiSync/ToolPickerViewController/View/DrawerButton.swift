@@ -163,3 +163,40 @@ final class LassoButton: UIButton, DrawerButton {
     }
     
 }
+
+final class RulerButton: UIButton, DrawerButton {
+    
+    override var isSelected: Bool {
+        didSet {
+            if isSelected {
+                self.setTitle("Selected", for: .normal)
+            } else {
+                self.setTitle("Lasso", for: .normal)
+            }
+        }
+    }
+    
+    override init(frame: CGRect) {
+        super.init(frame: .zero)
+        self.setTitle("Lasso", for: .normal)
+        self.setTitleColor(.black, for: .normal)
+    }
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        self.isSelected = false
+    }
+    
+    func setSelected(to bool: Bool) {
+        isSelected = bool
+    }
+    
+    func set(action: UIAction, for event: UIControl.Event) {
+        addAction(action, for: event)
+    }
+    
+    func set(backgroundcolor: UIColor) {
+        backgroundColor = backgroundcolor
+    }
+    
+}

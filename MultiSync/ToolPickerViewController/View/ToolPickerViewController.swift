@@ -35,6 +35,10 @@ final class ToolPickerViewController: UIViewController {
         let lassoTool = PKLassoTool()
         return lassoTool
     }()
+    private let colorPickerViewController: UIColorPickerViewController = {
+        let colorPicker = UIColorPickerViewController()
+        return colorPicker
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,6 +46,8 @@ final class ToolPickerViewController: UIViewController {
         
         view.addSubview(toolPickerView)
         view.addSubview(canvasView)
+        
+        colorPickerViewController.delegate = self
         
         toolPickerView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
         toolPickerView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
@@ -149,8 +155,35 @@ extension ToolPickerViewController {
             self.inkingTool?.color = .green
             self.canvasView.tool = self.inkingTool ?? .init(.pen)
         }
+        
+        let colorPickerAction = UIAction { action in
+            self.toolPickerView.didSelectColorButton(at: 5)
+            self.presentColorPicker()
+        }
 
-        toolPickerView.set(blackColorAction: blackColorAction, redColorAction: redColorAction, blueColorAction: blueColorAction, yellowColorAction: yellowColorAction, greenColorAction: greenColorAction, for: .touchUpInside)
+        toolPickerView.set(blackColorAction: blackColorAction, redColorAction: redColorAction, blueColorAction: blueColorAction, yellowColorAction: yellowColorAction, greenColorAction: greenColorAction, colorPickerAction: colorPickerAction, for: .touchUpInside)
+    }
+    
+    private func presentColorPicker() {
+        colorPickerViewController.title = "Pen Color"
+        colorPickerViewController.supportsAlpha = false
+        colorPickerViewController.modalPresentationStyle = .popover
+        toolPickerView.didSet(to: colorPickerViewController.popoverPresentationController)
+        self.present(colorPickerViewController, animated: true)
+    }
+}
+
+extension ToolPickerViewController: UIColorPickerViewControllerDelegate {
+    func colorPickerViewControllerDidFinish(_ viewController: UIColorPickerViewController) {
+        let selectedColor = viewController.selectedColor
+        self.inkingTool?.color = selectedColor
+        self.canvasView.tool = self.inkingTool ?? .init(.pen)
+        dismiss(animated: true, completion: nil)
+    }
+    
+    func colorPickerViewController(_ viewController: UIColorPickerViewController, didSelect color: UIColor, continuously: Bool) {
+        self.inkingTool?.color = color
+        print(color)
     }
 }
 
