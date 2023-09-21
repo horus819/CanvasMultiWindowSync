@@ -38,10 +38,6 @@ final class LightWidthButton: UIButton, DrawerButton {
         addAction(action, for: event)
     }
     
-    func set(backgroundcolor: UIColor) {
-        backgroundColor = backgroundcolor
-    }
-    
 }
 final class MediumWidthButton: UIButton, DrawerButton {
     
@@ -74,10 +70,6 @@ final class MediumWidthButton: UIButton, DrawerButton {
         addAction(action, for: event)
     }
     
-    func set(backgroundcolor: UIColor) {
-        backgroundColor = backgroundcolor
-    }
-    
 }
 final class HeavyWidthButton: UIButton, DrawerButton {
     
@@ -108,10 +100,6 @@ final class HeavyWidthButton: UIButton, DrawerButton {
     
     func set(action: UIAction, for event: UIControl.Event) {
         addAction(action, for: event)
-    }
-    
-    func set(backgroundcolor: UIColor) {
-        backgroundColor = backgroundcolor
     }
     
 }

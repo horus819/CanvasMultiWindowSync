@@ -38,10 +38,6 @@ final class BlackColorPickerButton: UIButton, DrawerButton {
         addAction(action, for: event)
     }
     
-    func set(backgroundcolor: UIColor) {
-        backgroundColor = backgroundcolor
-    }
-    
 }
 
 final class RedColorPickerButton: UIButton, DrawerButton {
@@ -73,10 +69,6 @@ final class RedColorPickerButton: UIButton, DrawerButton {
     
     func set(action: UIAction, for event: UIControl.Event) {
         addAction(action, for: event)
-    }
-    
-    func set(backgroundcolor: UIColor) {
-        backgroundColor = backgroundcolor
     }
     
 }
@@ -111,11 +103,7 @@ final class BlueColorPickerButton: UIButton, DrawerButton {
     func set(action: UIAction, for event: UIControl.Event) {
         addAction(action, for: event)
     }
-    
-    func set(backgroundcolor: UIColor) {
-        backgroundColor = backgroundcolor
-    }
-    
+
 }
 
 final class YellowColorPickerButton: UIButton, DrawerButton {
@@ -148,11 +136,7 @@ final class YellowColorPickerButton: UIButton, DrawerButton {
     func set(action: UIAction, for event: UIControl.Event) {
         addAction(action, for: event)
     }
-    
-    func set(backgroundcolor: UIColor) {
-        backgroundColor = backgroundcolor
-    }
-    
+
 }
 
 final class GreenColorPickerButton: UIButton, DrawerButton {
@@ -185,11 +169,7 @@ final class GreenColorPickerButton: UIButton, DrawerButton {
     func set(action: UIAction, for event: UIControl.Event) {
         addAction(action, for: event)
     }
-    
-    func set(backgroundcolor: UIColor) {
-        backgroundColor = backgroundcolor
-    }
-    
+
 }
 
 final class ColorPickerButton: UIButton, DrawerButton {
@@ -222,9 +202,5 @@ final class ColorPickerButton: UIButton, DrawerButton {
     func set(action: UIAction, for event: UIControl.Event) {
         addAction(action, for: event)
     }
-    
-    func set(backgroundcolor: UIColor) {
-        backgroundColor = backgroundcolor
-    }
-    
+
 }

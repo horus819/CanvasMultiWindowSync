@@ -60,6 +60,7 @@ final class ToolPickerViewController: UIViewController {
         canvasView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
         
         setDrawerActions()
+        setRulerAction()
         setWidthActions()
         setColorActions()
         setUndoAction()
@@ -98,6 +99,16 @@ extension ToolPickerViewController {
     }
 }
 
+// MARK: - Ruler
+extension ToolPickerViewController {
+    private func setRulerAction() {
+        let rulerAction = UIAction { action in
+            self.toolPickerView.didSelectRulerButton(for: self.canvasView)
+        }
+        toolPickerView.set(rulerAction: rulerAction, for: .touchUpInside)
+    }
+}
+
 // MARK: - Width
 extension ToolPickerViewController {
     private func setWidthActions() {
@@ -127,37 +138,37 @@ extension ToolPickerViewController {
 extension ToolPickerViewController {
     private func setColorActions() {
         let blackColorAction = UIAction { action in
-            self.toolPickerView.didSelectColorButton(at: 0)
+            self.toolPickerView.didSelectColorButton(at: 0, with: .black)
             self.inkingTool?.color = .black
             self.canvasView.tool = self.inkingTool ?? .init(.pen)
         }
         
         let redColorAction = UIAction { action in
-            self.toolPickerView.didSelectColorButton(at: 1)
+            self.toolPickerView.didSelectColorButton(at: 1, with: .red)
             self.inkingTool?.color = .red
             self.canvasView.tool = self.inkingTool ?? .init(.pen)
         }
         
         let blueColorAction = UIAction { action in
-            self.toolPickerView.didSelectColorButton(at: 2)
+            self.toolPickerView.didSelectColorButton(at: 2, with: .blue)
             self.inkingTool?.color = .blue
             self.canvasView.tool = self.inkingTool ?? .init(.pen)
         }
         
         let yellowColorAction = UIAction { action in
-            self.toolPickerView.didSelectColorButton(at: 3)
+            self.toolPickerView.didSelectColorButton(at: 3, with: .yellow)
             self.inkingTool?.color = .yellow
             self.canvasView.tool = self.inkingTool ?? .init(.pen)
         }
         
         let greenColorAction = UIAction { action in
-            self.toolPickerView.didSelectColorButton(at: 4)
+            self.toolPickerView.didSelectColorButton(at: 4, with: .green)
             self.inkingTool?.color = .green
             self.canvasView.tool = self.inkingTool ?? .init(.pen)
         }
         
         let colorPickerAction = UIAction { action in
-            self.toolPickerView.didSelectColorButton(at: 5)
+            self.toolPickerView.didSelectColorButton(at: 5, with: nil)
             self.presentColorPicker()
         }
 
@@ -183,7 +194,7 @@ extension ToolPickerViewController: UIColorPickerViewControllerDelegate {
     
     func colorPickerViewController(_ viewController: UIColorPickerViewController, didSelect color: UIColor, continuously: Bool) {
         self.inkingTool?.color = color
-        print(color)
+        self.canvasView.tool = self.inkingTool ?? .init(.pen)
     }
 }
 

@@ -13,7 +13,6 @@ protocol DrawerButton {
     
     func setSelected(to bool: Bool)
     func set(action: UIAction, for event: UIControl.Event)
-    func set(backgroundcolor: UIColor)
 }
 
 final class PenButton: UIButton, DrawerButton {
@@ -46,11 +45,7 @@ final class PenButton: UIButton, DrawerButton {
     func set(action: UIAction, for event: UIControl.Event) {
         addAction(action, for: event)
     }
-    
-    func set(backgroundcolor: UIColor) {
-        backgroundColor = backgroundcolor
-    }
-    
+
 }
 
 final class MarkerButton: UIButton, DrawerButton {
@@ -83,11 +78,7 @@ final class MarkerButton: UIButton, DrawerButton {
     func set(action: UIAction, for event: UIControl.Event) {
         addAction(action, for: event)
     }
-    
-    func set(backgroundcolor: UIColor) {
-        backgroundColor = backgroundcolor
-    }
-    
+
 }
 
 final class EraserButton: UIButton, DrawerButton {
@@ -119,10 +110,6 @@ final class EraserButton: UIButton, DrawerButton {
     
     func set(action: UIAction, for event: UIControl.Event) {
         addAction(action, for: event)
-    }
-    
-    func set(backgroundcolor: UIColor) {
-        backgroundColor = backgroundcolor
     }
     
 }
@@ -157,11 +144,7 @@ final class LassoButton: UIButton, DrawerButton {
     func set(action: UIAction, for event: UIControl.Event) {
         addAction(action, for: event)
     }
-    
-    func set(backgroundcolor: UIColor) {
-        backgroundColor = backgroundcolor
-    }
-    
+
 }
 
 final class RulerButton: UIButton, DrawerButton {
@@ -171,14 +154,14 @@ final class RulerButton: UIButton, DrawerButton {
             if isSelected {
                 self.setTitle("Selected", for: .normal)
             } else {
-                self.setTitle("Lasso", for: .normal)
+                self.setTitle("Ruler", for: .normal)
             }
         }
     }
     
     override init(frame: CGRect) {
         super.init(frame: .zero)
-        self.setTitle("Lasso", for: .normal)
+        self.setTitle("Ruler", for: .normal)
         self.setTitleColor(.black, for: .normal)
     }
     
@@ -194,9 +177,5 @@ final class RulerButton: UIButton, DrawerButton {
     func set(action: UIAction, for event: UIControl.Event) {
         addAction(action, for: event)
     }
-    
-    func set(backgroundcolor: UIColor) {
-        backgroundColor = backgroundcolor
-    }
-    
+
 }

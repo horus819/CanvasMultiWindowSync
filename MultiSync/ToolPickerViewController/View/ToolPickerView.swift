@@ -24,6 +24,7 @@ final class ToolPickerView: UIView {
     private var drawerButtons: [DrawerButton]
     private var widthButtons: [DrawerButton]
     private var colorPickerButtons: [DrawerButton]
+    private var rulerButton: DrawerButton?
     private let undoButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -39,8 +40,9 @@ final class ToolPickerView: UIView {
         return button
     }()
     
-    init(drawerButtons: [DrawerButton] = [PenButton(), MarkerButton(), EraserButton(), LassoButton()], widthButtons: [DrawerButton] = [LightWidthButton(), MediumWidthButton(), HeavyWidthButton()], colorPickerButtons: [DrawerButton] = [BlackColorPickerButton(), RedColorPickerButton(), BlueColorPickerButton(), YellowColorPickerButton(), GreenColorPickerButton(), ColorPickerButton()]) {
+    init(drawerButtons: [DrawerButton] = [PenButton(), MarkerButton(), EraserButton(), LassoButton()], rulerButton: DrawerButton? = nil, widthButtons: [DrawerButton] = [LightWidthButton(), MediumWidthButton(), HeavyWidthButton()], colorPickerButtons: [DrawerButton] = [BlackColorPickerButton(), RedColorPickerButton(), BlueColorPickerButton(), YellowColorPickerButton(), GreenColorPickerButton(), ColorPickerButton()]) {
         self.drawerButtons = drawerButtons
+        self.rulerButton = rulerButton
         self.widthButtons = widthButtons
         self.colorPickerButtons = colorPickerButtons
         super.init(frame: .zero)
@@ -50,6 +52,7 @@ final class ToolPickerView: UIView {
     
     required init?(coder: NSCoder) {
         self.drawerButtons = [PenButton(), MarkerButton(), EraserButton(), LassoButton()]
+        self.rulerButton = nil
         self.widthButtons = [LightWidthButton(), MediumWidthButton(), HeavyWidthButton()]
         self.colorPickerButtons = [BlackColorPickerButton(), RedColorPickerButton(), BlueColorPickerButton(), YellowColorPickerButton(), GreenColorPickerButton(), ColorPickerButton()]
         super.init(coder: coder)
@@ -85,6 +88,31 @@ extension ToolPickerView {
     }
 }
 
+// MARK: - Ruler
+extension ToolPickerView {
+    func didSelectRulerButton(for canvasView: PKCanvasView) {
+        guard var rulerButton = rulerButton else { return }
+        if rulerButton.isSelected {
+            rulerButton.isSelected = false
+            canvasView.isRulerActive = rulerButton.isSelected
+        } else {
+            rulerButton.isSelected = true
+            canvasView.isRulerActive = rulerButton.isSelected
+        }
+    }
+    
+    func set(rulerAction: UIAction, for event: UIControl.Event) {
+        guard let rulerButton = rulerButton else { return }
+        set(rulerButton: rulerButton, rulerAction: rulerAction, for: event)
+    }
+    
+    private func set(rulerButton: DrawerButton, rulerAction: UIAction, for event: UIControl.Event) {
+        if rulerButton is RulerButton {
+            rulerButton.set(action: rulerAction, for: event)
+        }
+    }
+}
+
 // MARK: - Width
 extension ToolPickerView {
     func didSelectWidthButton(at index: Int) {
@@ -113,7 +141,7 @@ extension ToolPickerView {
 
 // MARK: - Color
 extension ToolPickerView {
-    func didSelectColorButton(at index: Int) {
+    func didSelectColorButton(at index: Int, with color: UIColor?) {
         if colorPickerButtons.count >= index {
             colorPickerButtons.forEach { $0.setSelected(to: false) }
             colorPickerButtons[index].setSelected(to: true)
@@ -166,6 +194,7 @@ extension ToolPickerView {
     private func addSubviews() {
         addSubview(drawerButtonStackView)
         drawerButtons.forEach { drawerButtonStackView.addArrangedSubview($0 as? UIButton ?? .init()) }
+        drawerButtonStackView.addArrangedSubview(rulerButton as? UIButton ?? .init())
         widthButtons.forEach { drawerButtonStackView.addArrangedSubview($0 as? UIButton ?? .init()) }
         colorPickerButtons.forEach { drawerButtonStackView.addArrangedSubview($0 as? UIButton ?? .init()) }
         drawerButtonStackView.addArrangedSubview(undoButton)

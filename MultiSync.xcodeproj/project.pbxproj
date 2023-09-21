@@ -10,6 +10,7 @@
 		A00AF8662A8464DB004B55B1 /* AsyncAwaitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A00AF8652A8464DB004B55B1 /* AsyncAwaitViewController.swift */; };
 		A03256482AA15C0300818691 /* ColorPickerButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A03256472AA15C0300818691 /* ColorPickerButton.swift */; };
 		A032564A2AA17A1400818691 /* WidthButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A03256492AA17A1400818691 /* WidthButton.swift */; };
+		A059A3922AB1812000226CB5 /* SliderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A059A3912AB1812000226CB5 /* SliderViewController.swift */; };
 		A05FC7BD2A5BD0DF00CEA3B1 /* DBMultiSyncViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A05FC7BC2A5BD0DF00CEA3B1 /* DBMultiSyncViewController.swift */; };
 		A05FC7BF2A5BD0E900CEA3B1 /* DBMultiSyncViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A05FC7BE2A5BD0E900CEA3B1 /* DBMultiSyncViewModel.swift */; };
 		A05FC7C22A5BD38A00CEA3B1 /* DrawingEntity.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A05FC7C02A5BD38A00CEA3B1 /* DrawingEntity.xcdatamodeld */; };
@@ -26,11 +27,13 @@
 		A065B7652AA06CD500C72630 /* ToolPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A065B7642AA06CD500C72630 /* ToolPickerView.swift */; };
 		A065B7672AA0701200C72630 /* ToolPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A065B7662AA0701200C72630 /* ToolPickerViewController.swift */; };
 		A0683F532A57DFF3003884EE /* CanvasSyncViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0683F522A57DFF3003884EE /* CanvasSyncViewController.swift */; };
+		A06E57082AAFF7B7008ED435 /* DynamicCellViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A06E57072AAFF7B7008ED435 /* DynamicCellViewController.swift */; };
 		A0714ACF2A56936C0043A4A6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0714ACE2A56936C0043A4A6 /* AppDelegate.swift */; };
 		A0714AD12A56936C0043A4A6 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0714AD02A56936C0043A4A6 /* SceneDelegate.swift */; };
 		A0714AD82A56936D0043A4A6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A0714AD72A56936D0043A4A6 /* Assets.xcassets */; };
 		A0714ADB2A56936D0043A4A6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A0714AD92A56936D0043A4A6 /* LaunchScreen.storyboard */; };
 		A0714AE32A5693ED0043A4A6 /* MultiSyncViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0714AE22A5693ED0043A4A6 /* MultiSyncViewController.swift */; };
+		A090809F2ABBDC53008805B4 /* OAuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A090809E2ABBDC53008805B4 /* OAuthViewController.swift */; };
 		A0A6E2A22A807712000EA24D /* ButtonSyncViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0A6E2A12A807712000EA24D /* ButtonSyncViewController.swift */; };
 		A0A6E2A52A807BC3000EA24D /* ButtonSyncViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0A6E2A42A807BC3000EA24D /* ButtonSyncViewModel.swift */; };
 		A0A6E2A72A807BD7000EA24D /* Selection.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0A6E2A62A807BD7000EA24D /* Selection.swift */; };
@@ -40,12 +43,16 @@
 		A0BFBDBC2A81C1E60095F743 /* SelectionButtonsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0BFBDBB2A81C1E60095F743 /* SelectionButtonsViewController.swift */; };
 		A0BFBDBF2A8218B40095F743 /* StackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0BFBDBE2A8218B40095F743 /* StackViewController.swift */; };
 		A0DEE9DA2A5D1A5D0087A5B8 /* Debouncer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0DEE9D92A5D1A5D0087A5B8 /* Debouncer.swift */; };
+		A0E5A72C2AA998BB005628E6 /* UndoRedoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0E5A72B2AA998BB005628E6 /* UndoRedoViewController.swift */; };
+		A0F1215D2AB3E56100F09E96 /* DataCanvasViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0F1215C2AB3E56000F09E96 /* DataCanvasViewController.swift */; };
+		A0F5048D2AAEE8180059C6FD /* TodoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0F5048C2AAEE8180059C6FD /* TodoViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		A00AF8652A8464DB004B55B1 /* AsyncAwaitViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncAwaitViewController.swift; sourceTree = "<group>"; };
 		A03256472AA15C0300818691 /* ColorPickerButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPickerButton.swift; sourceTree = "<group>"; };
 		A03256492AA17A1400818691 /* WidthButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidthButton.swift; sourceTree = "<group>"; };
+		A059A3912AB1812000226CB5 /* SliderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SliderViewController.swift; sourceTree = "<group>"; };
 		A05FC7BC2A5BD0DF00CEA3B1 /* DBMultiSyncViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBMultiSyncViewController.swift; sourceTree = "<group>"; };
 		A05FC7BE2A5BD0E900CEA3B1 /* DBMultiSyncViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBMultiSyncViewModel.swift; sourceTree = "<group>"; };
 		A05FC7C12A5BD38A00CEA3B1 /* Drawing.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Drawing.xcdatamodel; sourceTree = "<group>"; };
@@ -62,6 +69,7 @@
 		A065B7642AA06CD500C72630 /* ToolPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolPickerView.swift; sourceTree = "<group>"; };
 		A065B7662AA0701200C72630 /* ToolPickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolPickerViewController.swift; sourceTree = "<group>"; };
 		A0683F522A57DFF3003884EE /* CanvasSyncViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CanvasSyncViewController.swift; sourceTree = "<group>"; };
+		A06E57072AAFF7B7008ED435 /* DynamicCellViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamicCellViewController.swift; sourceTree = "<group>"; };
 		A0714ACB2A56936C0043A4A6 /* MultiSync.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MultiSync.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A0714ACE2A56936C0043A4A6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A0714AD02A56936C0043A4A6 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -69,6 +77,7 @@
 		A0714ADA2A56936D0043A4A6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A0714ADC2A56936D0043A4A6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A0714AE22A5693ED0043A4A6 /* MultiSyncViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiSyncViewController.swift; sourceTree = "<group>"; };
+		A090809E2ABBDC53008805B4 /* OAuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuthViewController.swift; sourceTree = "<group>"; };
 		A0A6E2A12A807712000EA24D /* ButtonSyncViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonSyncViewController.swift; sourceTree = "<group>"; };
 		A0A6E2A42A807BC3000EA24D /* ButtonSyncViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonSyncViewModel.swift; sourceTree = "<group>"; };
 		A0A6E2A62A807BD7000EA24D /* Selection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Selection.swift; sourceTree = "<group>"; };
@@ -78,6 +87,9 @@
 		A0BFBDBB2A81C1E60095F743 /* SelectionButtonsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectionButtonsViewController.swift; sourceTree = "<group>"; };
 		A0BFBDBE2A8218B40095F743 /* StackViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StackViewController.swift; sourceTree = "<group>"; };
 		A0DEE9D92A5D1A5D0087A5B8 /* Debouncer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Debouncer.swift; sourceTree = "<group>"; };
+		A0E5A72B2AA998BB005628E6 /* UndoRedoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UndoRedoViewController.swift; sourceTree = "<group>"; };
+		A0F1215C2AB3E56000F09E96 /* DataCanvasViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataCanvasViewController.swift; sourceTree = "<group>"; };
+		A0F5048C2AAEE8180059C6FD /* TodoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,6 +109,14 @@
 				A00AF8652A8464DB004B55B1 /* AsyncAwaitViewController.swift */,
 			);
 			path = AsyncAwaitViewController;
+			sourceTree = "<group>";
+		};
+		A059A3902AB1810800226CB5 /* SliderViewController */ = {
+			isa = PBXGroup;
+			children = (
+				A059A3912AB1812000226CB5 /* SliderViewController.swift */,
+			);
+			path = SliderViewController;
 			sourceTree = "<group>";
 		};
 		A05FC7BB2A5BD0C800CEA3B1 /* DBMultiSyncViewController */ = {
@@ -144,6 +164,14 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		A06E57062AAFF7A3008ED435 /* DynamicCellViewController */ = {
+			isa = PBXGroup;
+			children = (
+				A06E57072AAFF7B7008ED435 /* DynamicCellViewController.swift */,
+			);
+			path = DynamicCellViewController;
+			sourceTree = "<group>";
+		};
 		A0714AC22A56936C0043A4A6 = {
 			isa = PBXGroup;
 			children = (
@@ -163,6 +191,12 @@
 		A0714ACD2A56936C0043A4A6 /* MultiSync */ = {
 			isa = PBXGroup;
 			children = (
+				A090809D2ABBDC42008805B4 /* OAuthViewController */,
+				A0F1215B2AB3E55400F09E96 /* DataCanvasViewController */,
+				A059A3902AB1810800226CB5 /* SliderViewController */,
+				A06E57062AAFF7A3008ED435 /* DynamicCellViewController */,
+				A0F5048B2AAEE80A0059C6FD /* TodoViewController */,
+				A0E5A72A2AA998AB005628E6 /* UndoRedoViewController */,
 				A065B75E2AA03A4E00C72630 /* ToolPickerViewController */,
 				A00AF8642A8464CB004B55B1 /* AsyncAwaitViewController */,
 				A0BFBDBD2A8218A40095F743 /* Stack */,
@@ -182,6 +216,14 @@
 				A0DEE9D92A5D1A5D0087A5B8 /* Debouncer.swift */,
 			);
 			path = MultiSync;
+			sourceTree = "<group>";
+		};
+		A090809D2ABBDC42008805B4 /* OAuthViewController */ = {
+			isa = PBXGroup;
+			children = (
+				A090809E2ABBDC53008805B4 /* OAuthViewController.swift */,
+			);
+			path = OAuthViewController;
 			sourceTree = "<group>";
 		};
 		A0A6E2A32A807BB7000EA24D /* ButtonSync */ = {
@@ -218,6 +260,30 @@
 				A0BFBDBE2A8218B40095F743 /* StackViewController.swift */,
 			);
 			path = Stack;
+			sourceTree = "<group>";
+		};
+		A0E5A72A2AA998AB005628E6 /* UndoRedoViewController */ = {
+			isa = PBXGroup;
+			children = (
+				A0E5A72B2AA998BB005628E6 /* UndoRedoViewController.swift */,
+			);
+			path = UndoRedoViewController;
+			sourceTree = "<group>";
+		};
+		A0F1215B2AB3E55400F09E96 /* DataCanvasViewController */ = {
+			isa = PBXGroup;
+			children = (
+				A0F1215C2AB3E56000F09E96 /* DataCanvasViewController.swift */,
+			);
+			path = DataCanvasViewController;
+			sourceTree = "<group>";
+		};
+		A0F5048B2AAEE80A0059C6FD /* TodoViewController */ = {
+			isa = PBXGroup;
+			children = (
+				A0F5048C2AAEE8180059C6FD /* TodoViewController.swift */,
+			);
+			path = TodoViewController;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -294,11 +360,13 @@
 				A0A6E2A72A807BD7000EA24D /* Selection.swift in Sources */,
 				A05FC7C82A5BD55900CEA3B1 /* DrawingStorage.swift in Sources */,
 				A0714ACF2A56936C0043A4A6 /* AppDelegate.swift in Sources */,
+				A06E57082AAFF7B7008ED435 /* DynamicCellViewController.swift in Sources */,
 				A05FC7BD2A5BD0DF00CEA3B1 /* DBMultiSyncViewController.swift in Sources */,
 				A05FC7C22A5BD38A00CEA3B1 /* DrawingEntity.xcdatamodeld in Sources */,
 				A0BFBDBA2A81C1DA0095F743 /* SelectionButtonsViewModel.swift in Sources */,
 				A065B7672AA0701200C72630 /* ToolPickerViewController.swift in Sources */,
 				A05FC7D32A5BE6F700CEA3B1 /* RuntimeSyncViewModel.swift in Sources */,
+				A0F1215D2AB3E56100F09E96 /* DataCanvasViewController.swift in Sources */,
 				A03256482AA15C0300818691 /* ColorPickerButton.swift in Sources */,
 				A05FC7C42A5BD3D000CEA3B1 /* DBMultiSyncCoreData.swift in Sources */,
 				A065B7632AA06CBB00C72630 /* DrawerButton.swift in Sources */,
@@ -312,11 +380,15 @@
 				A05FC7CC2A5BD5F100CEA3B1 /* Drawing.swift in Sources */,
 				A0714AD12A56936C0043A4A6 /* SceneDelegate.swift in Sources */,
 				A032564A2AA17A1400818691 /* WidthButton.swift in Sources */,
+				A0E5A72C2AA998BB005628E6 /* UndoRedoViewController.swift in Sources */,
 				A0DEE9DA2A5D1A5D0087A5B8 /* Debouncer.swift in Sources */,
 				A05FC7D12A5BE6C800CEA3B1 /* RuntimeSyncViewController.swift in Sources */,
 				A0714AE32A5693ED0043A4A6 /* MultiSyncViewController.swift in Sources */,
+				A0F5048D2AAEE8180059C6FD /* TodoViewController.swift in Sources */,
 				A0A6E2A22A807712000EA24D /* ButtonSyncViewController.swift in Sources */,
 				A00AF8662A8464DB004B55B1 /* AsyncAwaitViewController.swift in Sources */,
+				A090809F2ABBDC53008805B4 /* OAuthViewController.swift in Sources */,
+				A059A3922AB1812000226CB5 /* SliderViewController.swift in Sources */,
 				A05FC7CE2A5BDD0900CEA3B1 /* DBMultiSyncUseCase.swift in Sources */,
 				A0B462B12A5B7E4800F9910F /* CombineMultiSyncViewController.swift in Sources */,
 				A05FC7CA2A5BD5BF00CEA3B1 /* DrawingRepository.swift in Sources */,

@@ -40,7 +40,7 @@ extension OMGMemberResponseDTO {
 protocol Network {
     func request(with url: URL) async throws -> Data
     func request(with url: URL, completion: @escaping (Result<Data, Error>) -> Void)
-    func request(with url: URL) -> URLSession.DataTaskPublisher
+    func request(with url: URL) -> AnyPublisher<Data, Error>
 }
 
 final class DefaultNetwork: Network {
@@ -113,8 +113,20 @@ final class DefaultNetwork: Network {
         task.resume()
     }
     
-    func request(with url: URL) -> URLSession.DataTaskPublisher {
-        return URLSession.shared.dataTaskPublisher(for: url)
+    private func request(with url: URL) -> URLSession.DataTaskPublisher {
+        let request = URLRequest(url: url)
+        return URLSession.shared.dataTaskPublisher(for: request)
+    }
+    
+    func request(with url: URL) -> AnyPublisher<Data, Error> {
+        return request(with: url)
+            .tryMap { data, response in
+                guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 else {
+                    throw URLError(.notConnectedToInternet)
+                }
+                return data
+            }
+            .eraseToAnyPublisher()
     }
     
 }
@@ -176,16 +188,7 @@ final class DefaultDataTransferService: DataTransferService {
     
     func request(with url: URL) -> AnyPublisher<OMGResponseDTO, Error> {
         return network.request(with: url)
-            .tryMap { data, response in
-                guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 else {
-                    throw URLError(.badServerResponse)
-                }
-                return data
-            }
             .decode(type: OMGResponseDTO.self, decoder: decoder)
-            .mapError { error in
-                return error
-            }
             .eraseToAnyPublisher()
     }
     
@@ -301,6 +304,7 @@ protocol AsyncAwaitViewModel: OMGMemberDataSource {
     func didPressedRequestButton() async
     func didPressedRequestButton()
     func didPressedRequestButtonWithCombine() -> AnyCancellable
+    func didPressedRequestButtonWithCancellable()
 }
 
 final class DefaultAsyncAwaitViewModel: AsyncAwaitViewModel {
@@ -391,6 +395,33 @@ final class DefaultAsyncAwaitViewModel: AsyncAwaitViewModel {
         return cancellable
     }
     
+    private var cancellables: Set<AnyCancellable> = []
+    
+    func didPressedRequestButtonWithCancellable() {
+        useCase.executeRequest()
+            .sink { [weak self] completion in
+                switch completion {
+                case .finished:
+                    return
+                    
+                case .failure(let error):
+                    self?.requestError.send(error)
+                    
+                }
+            } receiveValue: { [weak self] omg in
+                guard let self = self else {
+                    self?.requestError.send(AsyncAwaitViewModelError.emptyInstance)
+                    return
+                }
+                self.omg = omg
+                self.omgSubject.send(self.omg)
+                self.omgMember = omg.member
+                self.omgMemberListViewModel = self.omgMember.map { .init(omgMember: $0) }
+                self.omgMemberListViewModelSubject.send(omgMemberListViewModel)
+            }
+            .store(in: &cancellables)
+    }
+    
 }
 
 extension DefaultAsyncAwaitViewModel: OMGMemberDataSource {
@@ -458,14 +489,16 @@ final class AsyncAwaitViewController: UIViewController {
     
     @objc func requestButtonAction(_ sender: UIButton) {
         // MARK: - Async, Await
-        Task {
-            await viewModel.didPressedRequestButton()
-        }
+//        Task {
+//            await viewModel.didPressedRequestButton()
+//        }
         // MARK: - Completion
 //        viewModel.didPressedRequestButton()
         // MARK: - Combine
-//        viewModel.didPressedRequestButtonWithCombine()
-//            .store(in: &cancellables)
+        viewModel.didPressedRequestButtonWithCombine()
+            .store(in: &cancellables)
+        
+        viewModel.didPressedRequestButtonWithCancellable()
     }
     
     private func presentAlert(of error: Error) {
@@ -594,70 +627,4 @@ extension OMGMemberListAdapter: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return delegate?.heightForRow(at: indexPath) ?? 0
     }
-}
-
-final class CustomPalletteView: UIView {
-    
-}
-
-protocol Pallette {
-    
-}
-
-final class CustomPallette: Pallette {
-    
-    enum Mode {
-        case three
-        case four
-        case five
-    }
-    
-    private var drawables: [Drawable]
-    
-    init(drawables: [Drawable]) {
-        self.drawables = drawables
-    }
-    
-    init(mode: Mode) {
-        switch mode {
-        case .three:
-            self.drawables = [Pencil(), LargePencil(), Erasure()]
-            
-        case .four:
-            self.drawables = [Pencil(), LargePencil(), Erasure(), Lasso()]
-            
-        case .five:
-            self.drawables = [Pencil(), LargePencil(), Erasure(), Lasso(), Ruler()]
-            
-        }
-    }
-    
-}
-
-protocol SelectableColor {
-    
-}
-
-protocol Drawable {
-    
-}
-
-final class Pencil: Drawable {
-    
-}
-
-final class LargePencil: Drawable {
-    
-}
-
-final class Erasure: Drawable {
-    
-}
-
-final class Lasso: Drawable {
-    
-}
-
-final class Ruler: Drawable {
-    
 }
