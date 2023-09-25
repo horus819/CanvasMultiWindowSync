@@ -297,14 +297,12 @@ enum AsyncAwaitViewModelError: Error {
 }
 
 protocol AsyncAwaitViewModel: OMGMemberDataSource {
-    var omgPublisher: AnyPublisher<OMG, Never> { get }
     var requestErrorPublisher: AnyPublisher<Error, Never> { get }
     var omgMemeberListViewModelPublisher: AnyPublisher<[OMGMemberListViewModel], Never> { get }
     
     func didPressedRequestButton() async
     func didPressedRequestButton()
     func didPressedRequestButtonWithCombine() -> AnyCancellable
-    func didPressedRequestButtonWithCancellable()
 }
 
 final class DefaultAsyncAwaitViewModel: AsyncAwaitViewModel {
@@ -315,13 +313,8 @@ final class DefaultAsyncAwaitViewModel: AsyncAwaitViewModel {
     private var omgMember: [OMGMember]
     private var omgMemberListViewModel: [OMGMemberListViewModel]
     private let omgMemberListViewModelSubject: CurrentValueSubject<[OMGMemberListViewModel], Never>
-    private let omgSubject: CurrentValueSubject<OMG, Never>
     private let requestError: PassthroughSubject<Error, Never>
-    
-    var omgPublisher: AnyPublisher<OMG, Never> {
-        omgSubject.eraseToAnyPublisher()
-    }
-    
+
     var requestErrorPublisher: AnyPublisher<Error, Never> {
         requestError.eraseToAnyPublisher()
     }
@@ -336,7 +329,6 @@ final class DefaultAsyncAwaitViewModel: AsyncAwaitViewModel {
         self.omgMember = []
         self.omgMemberListViewModel = .init([])
         self.omgMemberListViewModelSubject = .init([])
-        self.omgSubject = .init(.init(member: []))
         self.requestError = .init()
     }
     
@@ -344,7 +336,6 @@ final class DefaultAsyncAwaitViewModel: AsyncAwaitViewModel {
         do {
             let omg = try await useCase.executeRequest()
             self.omg = omg
-            self.omgSubject.send(self.omg)
             self.omgMember = omg.member
             self.omgMemberListViewModel = self.omgMember.map { .init(omgMember: $0) }
             self.omgMemberListViewModelSubject.send(omgMemberListViewModel)
@@ -358,7 +349,6 @@ final class DefaultAsyncAwaitViewModel: AsyncAwaitViewModel {
             switch result {
             case .success(let omg):
                 self.omg = omg
-                self.omgSubject.send(self.omg)
                 self.omgMember = omg.member
                 self.omgMemberListViewModel = self.omgMember.map { .init(omgMember: $0) }
                 self.omgMemberListViewModelSubject.send(self.omgMemberListViewModel)
@@ -387,7 +377,6 @@ final class DefaultAsyncAwaitViewModel: AsyncAwaitViewModel {
                     return
                 }
                 self.omg = omg
-                self.omgSubject.send(self.omg)
                 self.omgMember = omg.member
                 self.omgMemberListViewModel = self.omgMember.map { .init(omgMember: $0) }
                 self.omgMemberListViewModelSubject.send(omgMemberListViewModel)
@@ -395,31 +384,8 @@ final class DefaultAsyncAwaitViewModel: AsyncAwaitViewModel {
         return cancellable
     }
     
-    private var cancellables: Set<AnyCancellable> = []
-    
-    func didPressedRequestButtonWithCancellable() {
-        useCase.executeRequest()
-            .sink { [weak self] completion in
-                switch completion {
-                case .finished:
-                    return
-                    
-                case .failure(let error):
-                    self?.requestError.send(error)
-                    
-                }
-            } receiveValue: { [weak self] omg in
-                guard let self = self else {
-                    self?.requestError.send(AsyncAwaitViewModelError.emptyInstance)
-                    return
-                }
-                self.omg = omg
-                self.omgSubject.send(self.omg)
-                self.omgMember = omg.member
-                self.omgMemberListViewModel = self.omgMember.map { .init(omgMember: $0) }
-                self.omgMemberListViewModelSubject.send(omgMemberListViewModel)
-            }
-            .store(in: &cancellables)
+    func didPressedRequestButtonWithAssign() {
+        let cancellable = useCase.executeRequest()
     }
     
 }
@@ -479,7 +445,7 @@ final class AsyncAwaitViewController: UIViewController {
         
         addActionForRequestButton()
         
-        subscribeOMG(from: viewModel.omgPublisher)
+        subscribeOMG(from: viewModel.omgMemeberListViewModelPublisher)
         subscribeRequestError(from: viewModel.requestErrorPublisher)
     }
     
@@ -497,8 +463,6 @@ final class AsyncAwaitViewController: UIViewController {
         // MARK: - Combine
         viewModel.didPressedRequestButtonWithCombine()
             .store(in: &cancellables)
-        
-        viewModel.didPressedRequestButtonWithCancellable()
     }
     
     private func presentAlert(of error: Error) {
@@ -510,7 +474,7 @@ final class AsyncAwaitViewController: UIViewController {
         }
     }
     
-    private func subscribeOMG(from omgPublisher: AnyPublisher<OMG, Never>) {
+    private func subscribeOMG(from omgPublisher: AnyPublisher<[OMGMemberListViewModel], Never>) {
         omgPublisher
             .receive(on: DispatchQueue.main)
             .sink { [weak self] omg in
